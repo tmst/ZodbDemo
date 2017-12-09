@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from loader import Configuration
+from loader import PythonConfiguration
 
 
 def get_key(path):
@@ -16,7 +16,7 @@ def get_key(path):
     return key
 
 
-with Configuration('config.json') as config:
+with PythonConfiguration('config.json') as config:
 
     # We setup the cache for Chameleon templates
     os.environ["CHAMELEON_CACHE"] = config['templates']['cache']
@@ -41,5 +41,5 @@ with Configuration('config.json') as config:
     load_translations_directories()
 
     # Create the application, including the middlewares.
-    from cromdemo.wsgi import demo_application
+    from cromdemo.app import demo_application
     application = session_wrapper(demo_application)

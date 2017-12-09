@@ -8,7 +8,7 @@ CH_DIR = os.path.abspath(os.path.dirname(__file__))
 CONFIG = os.path.join(CH_DIR, 'config.json')
 
 
-class Configuration(object):
+class PythonConfiguration(object):
 
     def __init__(self, filename, directory=None):
         if directory is None:

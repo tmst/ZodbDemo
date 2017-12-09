@@ -19,20 +19,101 @@ editing leaves.  And one to show actions.
 
 The following files are included.
 
-auth.py
-models.py
-security.py
-wsgi.py
-browser
-   forms.py
-   layout.py
-   views.py
-   templates
-      home.pt
-      layout.pt
-      leaf.pt
-      tabs.pt
-      
+bootstrap.py
+loader.py
+server.py
+          auth.py
+          models.py
+          security.py
+          app.py
+          browser
+             forms.py
+             layout.py
+             views.py
+             templates
+                home.pt
+                layout.pt
+                leaf.pt
+                tabs.pt
+
+So first take a look at server.py.
+That sets up the wsgi server, and calls demo_application in
+src/cromdemo/src/cromdemo/demo.py
+
+Here is what the wraps decorator does
+https://www.blog.pythonlibrary.org/2016/02/17/python-functools-wraps/
+
+
+Okay, but what does all of this software do?
+
+There is a lot going on in not many lines of code here.  At first it can be
+a bit hard to follow, so let me describe in English what it does.
+
+When you first download this there is a file called bootstrap.py.
+You run
+python bootstrap.py to create bin/buildout.
+
+When you run bin/buildout, it downlaods all the required software, and creates
+all the files and directories needed to run the application.
+In particular it creates config.json, which includes all the Python Path
+information.
+
+So what does Cromlech do?
+
+So first you have to understand that Cromlech is a toolkit.  There are many
+ways to configure it.  This is but one configuration.
+
+In loader.py there is something called PythonConfiguration.
+It imports config.json to create
+the Python Path that the application uses to search for
+Python definitions. 
+
+Server.py  defines all the things required to configure the servers.
+
+And finally there is app.py.    That is where the application functionality
+is defined.
+
+Cromlech uses a concept called object publishing.   When your browser goes
+to a url, the wsgi server calls a Python application.  And it passest a
+bunch of variables to that Python application in a request object.  The
+object publisher first looks up the object,
+then it looks up the view on that object.
+It executes the view and returns the result.
+
+
+That is the simple story.  Security requirements make things even more
+complex than that.   The request stores its values in a dictionary called
+environ. That may include cookies.  And the cookies may include the
+identity of the logged in user.  So before calling the application it has
+to create a user session, and convert that cookie into a user name.  And
+if there is a user name, it has to convert that name into a Zope principal
+object, used by zope.security, or into the unauthenticaed user.
+
+And then at the end, when object publishing executes the view, to generate
+the response object,  the security machinery will be
+invoked.  Of course security is only invoked if you have used a decorator
+to declare something to be a protected view.
+If the called view is protected, the security will check if it is a logged
+in principal,  what permissions are needed for
+that view, and  if the principal has those permissions.  If all is
+well, the view is rendered,  otherwise a security exception is thrown,
+and the user is
+redirected to a login page.
+
+How is all this implemented?
+Before you get to the Application several things happen in decorators.
+
+Before calling the application, the sessiond decorator is called.  It checks
+to see if there is a session, if so it sets
+environ[“username”]= uername
+
+If there is a username, it then creates a principal.
+
+There is a lot going on here.  Even for an experienced zope developer, it
+takes a while to get it all.  But once you understand the abstractions, many
+things are made simple, and your productiivty will rapidly increase. 
+
+
 Installation instructions are below.
 
 For python2.7+
@@ -43,7 +124,7 @@ $> virtualenv . && source bin/activate
 $> python bootstrap.py
 $> ./bin/buildout
 $> pip install uwsgi
-$> uwsgi --http :8080 --wsgi-file app.py
+$> uwsgi --http :8080 --wsgi-file server.py
 ```
 
 For python3.3+
@@ -61,4 +142,5 @@ it will allow you to use PDB without problems.
 You can also reduce the number of workers to 1.
 Use the option -p 1
 
- uwsgi --http :8080 --wsgi-file -p 1 --honour-stdin app.py
+ uwsgi --http :8080 --wsgi-file -p 1 --honour-stdin server.py
+ 
