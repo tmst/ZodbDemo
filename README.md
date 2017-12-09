@@ -10,12 +10,12 @@ It creates a root node, with two leaves.
 You have two forms.  One to edit the leaves.  One to login.
 
 There are 4 templates. The layout gives the overall appearance.  There is a
-home page tempjlate, a leaf template  with a link to a protected view.  Maybe
-the protected view  allows editing the leaf.  And a tabs template.
+home page tempjlate, a leaf template  with a link to a protected view.
+And a tabs template.
 
 There is a layout.py file.  It includes a layout object.  And within the
-layout there can be two viewlets.  One to show a protected view.  Proably for
-editing leaves.  And one to show actions. 
+layout there can be two viewlets.  One to show a protected view.
+And one to show actions. 
 
 The following files are included.
 
@@ -35,13 +35,6 @@ server.py
                 layout.pt
                 leaf.pt
                 tabs.pt
-
-So first take a look at server.py.
-That sets up the wsgi server, and calls demo_application in
-src/cromdemo/src/cromdemo/demo.py
-
-Here is what the wraps decorator does
-https://www.blog.pythonlibrary.org/2016/02/17/python-functools-wraps/
 
 
 Okay, but what does all of this software do?
@@ -68,7 +61,10 @@ It imports config.json to create
 the Python Path that the application uses to search for
 Python definitions. 
 
+So first take a look at server.py.
 Server.py  defines all the things required to configure the servers.
+That sets up the wsgi server, and calls the
+[demo_application](./src/cromdemo/src/cromdemo/demo.py).
 
 And finally there is app.py.    That is where the application functionality
 is defined.
