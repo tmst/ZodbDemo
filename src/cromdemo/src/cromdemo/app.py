@@ -43,6 +43,14 @@ def sessionned(app):
     return with_session
 
 
+def session_set_principal(environ):
+            username = environ.get('REMOTE_USER')
+            if username is not None:
+                principal = Principal(username)
+            else:
+                principal = unauthenticated_principal
+            return principal
+        
 def demo_application(environ, start_response):
 
     @sessionned
@@ -51,11 +59,7 @@ def demo_application(environ, start_response):
         with EnvironLocale(environ):
             request = Request(environ)
             root = Root()
-            username = environ.get('REMOTE_USER')
-            if username is not None:
-                principal = Principal(username)
-            else:
-                principal = unauthenticated_principal
+            principal=session_set_principal(environ)
             with ContextualProtagonist(principal):
                 publisher = DawnlightPublisher(view_lookup=view_lookup)
                 response = publisher.publish(request, root, handle_errors=True)
