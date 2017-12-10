@@ -9,35 +9,14 @@ This demo  does not use the ZODB, but it does more than the ZODB demo.
 It creates a root node, with two leaves.
 You have two forms.  One to edit the leaves.  One to login.
 
-There are 4 templates. The layout gives the overall appearance.  There is a
-home page tempjlate, a leaf template  with a link to a protected view.
-And a tabs template.
+Before you get started, let me note that there is a lot of complexity here.
+All of it is needed.  It is the distilled wisdon of many people working on this
+for more than [20 years](https://en.wikipedia.org/wiki/Zope#History).
+Even I, the author of this document, had to go back and read it multiple times,
+each time going one layer deeper in understanding what is going on.  So be
+patient with yourself.  
 
-There is a layout.py file.  It includes a layout object.  And within the
-layout there can be two viewlets.  One to show a protected view.
-And one to show actions. 
-
-The following files are included.
-
-bootstrap.py
-loader.py
-server.py
-          auth.py
-          models.py
-          security.py
-          app.py
-          browser
-             forms.py
-             layout.py
-             views.py
-             templates
-                home.pt
-                layout.pt
-                leaf.pt
-                tabs.pt
-
-
-Okay, but what does all of this software do?
+So what does all of this software do?
 
 There is a lot going on in not many lines of code here.  At first it can be
 a bit hard to follow, so let me describe in English what it does.
@@ -51,7 +30,7 @@ all the files and directories needed to run the application.
 In particular it creates config.json, which includes all the Python Path
 information.
 
-So what does Cromlech do?
+So what does actually Cromlech do?
 
 So first you have to understand that Cromlech is a toolkit.  There are many
 ways to configure it.  This is but one configuration.
@@ -108,6 +87,36 @@ If there is a username, it then creates a principal.
 There is a lot going on here.  Even for an experienced zope developer, it
 takes a while to get it all.  But once you understand the abstractions, many
 things are made simple, and your productiivty will rapidly increase. 
+
+Okay, now let us take a loot at the structure of the software.
+
+Here are the files.
+The following files are included.
+
+bootstrap.py
+loader.py
+server.py
+          auth.py
+          models.py
+          security.py
+          app.py
+          browser
+             forms.py
+             layout.py
+             views.py
+             templates
+                home.pt
+                layout.pt
+                leaf.pt
+                tabs.pt
+
+There are 4 templates. The layout gives the overall appearance.  There is a
+home page tempjlate, a leaf template  with a link to a protected view.
+And a tabs template.
+
+There is a layout.py file.  It includes a layout object.  And within the
+layout there can be two viewlets.  One to show a protected view.
+And one to show actions. 
 
 
 Installation instructions are below.
