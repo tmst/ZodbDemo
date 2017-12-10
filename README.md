@@ -57,7 +57,21 @@ It executes the view and returns the result.
 
 
 That is the simple story.  Security requirements make things even more
-complex than that.   The request stores its values in a dictionary called
+complex than that. You can either secure your views or not.  If you do not
+secure your views, then the above description holds.  Everything is easy.
+If you do secure your views or objects.  Cromlech wraps them in a security
+proxy.  When you try to access or call them, the security machinery is invoked.
+The first thing the security machinery does is to check if you are logged in.
+If not, if you are the anonymous user, then you do not have permission, it
+throws an exception, and you have a chance to login. If you are logged in,
+then it it checks what permission is required, and whether you have that
+permission or not.
+
+This is a very simple security model.  If you want a much more sophisticated
+model, I recommend zope.securitypolicy.
+
+How does it know if you are logged in or not or who you are?
+The request stores its values in a dictionary called
 environ. That may include cookies.  And the cookies may include the
 identity of the logged in user.  So before calling the application it has
 to create a user session, and convert that cookie into a user name.  And
