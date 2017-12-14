@@ -23,6 +23,7 @@ setup(name='cromdemo',
       zip_safe=False,
       install_requires=[
           'crom',
+          'cromlech.zodb',
           'cromlech.auth',
           'cromlech.browser',
           'cromlech.configuration',

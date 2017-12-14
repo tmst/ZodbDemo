@@ -15,6 +15,23 @@ def get_key(path):
         key = JWTHandler.load_key_file(path)
     return key
 
+def init_db(db):
+    import pdb;pdb.set_trace()
+
+    with Configuration('config.json') as config:
+       """We create two leaves here.. We get the DB connection object.
+       We need to open and to close it. It doesn't need to return anything.
+       Make sure to use a transaction manager to have it correctly persisted.
+       """
+       from dolmen.container.components import BTreeContainer
+       conn = environ["zodb.connection"].get_connection('demo')
+       root = conn.root()
+       root['node1']=BTreeContainer()
+       root['node2']=BTreeContainer()
+       print  ("NAME",root['node1'].__name__)
+       import transaction
+       transaction.commit()
+
 
 with PythonConfiguration('config.json') as config:
 
@@ -26,6 +43,11 @@ with PythonConfiguration('config.json') as config:
     monkey.incompat()
     implicit.initialize()
 
+    # We read the zodb conf and initialize it
+    from cromlech.zodb import init_db_from_file
+    with open(config['zodb']['config'], 'r') as fd:
+        db = init_db_from_file(fd, init_db)
+        
     # Getting the crypto key and creating the JWT service
     from dolmen.sessions.jwt import JWTCookieSession
     key = get_key(config['session']['jwt_key'])
@@ -41,5 +63,17 @@ with PythonConfiguration('config.json') as config:
     load_translations_directories()
 
     # Create the application, including the middlewares.
+    # I LEAVE THE FOLLOWING THREE LINES IN THE SOURCE CODE
+    # BECAUSE THEY ARE PROALY NOT DOCUMENTED ANYWERHE,
+    # BUT VERY IMPORTANT MAGICAL INCANTATIONS
+    # First we do dispatch
+    #from rutter import urlAmap
+    #router = urlmap.URLMap()
+    #router['/demo'] = demo
+    
+    from cromlech.zodb.middleware import ZODBApp
     from cromdemo.app import demo_application
-    application = session_wrapper(demo_application)
+    zodb_wraooed_app =ZODBApp(demo_application, db, key="zodb.connection")
+    application =session_wrapper(zodb_wraapped_app)
+
+

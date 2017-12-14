@@ -57,8 +57,9 @@ def demo_application(environ, start_response):
     @secured(logins, "CromlechDemo")
     def publisher(environ, start_response):
         with EnvironLocale(environ):
+            conn = environ["zodb.connection"].get_connection('demo_application')
             request = Request(environ)
-            root = Root()
+            root = conn.root()
             principal=session_set_principal(environ)
             with ContextualProtagonist(principal):
                 publisher = DawnlightPublisher(view_lookup=view_lookup)
