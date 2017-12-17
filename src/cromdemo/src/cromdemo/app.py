@@ -14,6 +14,7 @@ from cromlech.security import unauthenticated_principal
 from cromlech.webob.request import Request
 
 from .models import Root
+
 from .auth import secured
 
 
@@ -24,6 +25,7 @@ logins = {
 
 
 def query_view(request, context, name=""):
+    import pdb;pdb.set_trace()
     view = IView.component(context, request, name=name)
     return view(context, request)
 
@@ -43,6 +45,25 @@ def sessionned(app):
     return with_session
 
 
+
+
+def init_db(conn):
+       #import pdb; pdb.set_trace()
+       root = conn.root()
+       if not hasattr(root,'applicationRoot'):
+          root.applicationRoot=Root()
+          root.__name__='root'
+          #root['node1']=BTreeContainer()
+          #root['node2']=BTreeContainer()
+          #print  ("NAME 1",root['node1'].__name__)
+          #print  ("NAME 2",root['node2'].__name__)
+          import transaction
+          transaction.commit()        
+
+
+
+
+
 def session_set_principal(environ):
             username = environ.get('REMOTE_USER')
             if username is not None:
@@ -50,16 +71,19 @@ def session_set_principal(environ):
             else:
                 principal = unauthenticated_principal
             return principal
-        
-def demo_application(environ, start_response):
 
+def demo_application(environ, start_response):
     @sessionned
     @secured(logins, "CromlechDemo")
     def publisher(environ, start_response):
         with EnvironLocale(environ):
-            conn = environ["zodb.connection"].get_connection('demo_application')
+            conn = environ["zodb.connection"] 
+            init_db(conn)
             request = Request(environ)
-            root = conn.root()
+            #root = Root()
+            root=conn.root()
+            root=root.applicationRoot
+            
             principal=session_set_principal(environ)
             with ContextualProtagonist(principal):
                 publisher = DawnlightPublisher(view_lookup=view_lookup)

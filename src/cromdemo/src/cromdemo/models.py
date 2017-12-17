@@ -15,7 +15,13 @@ class ILeaf(Interface):
     title = TextLine(title=u'title', required=True)
     body = Text(title=u'body', required=True)
 
+from dolmen.container import BTreeContainer    
 
+@implementer(IPublicationRoot)
+class Root(BTreeContainer):
+        title = u"Application  Root"
+
+    
 @implementer(ILeaf)
 class Leaf(Location):
 
@@ -23,19 +29,20 @@ class Leaf(Location):
         self.title = title
         self.body = body
 
-
+"""
 @implementer(IPublicationRoot)
-class Root(dict, Location):
+class Root(BTreeContainer):
 
     title = u"Demo Root"
 
     def __init__(self, *args, **kwargs):
         dict.__init__(self, *args, **kwargs)
         self['green'] = Leaf(u'Green leaf', u'A summer leaf')
-        self['yellow'] = Leaf(u'Yellow leaf', u'An automn leaf')
+         self['yellow'] = Leaf(u'Yellow leaf', u'An automn leaf')
 
     def __getitem__(self, key):
         item = dict.__getitem__(self, key)
         if item is not None:
             locate(item, self, key)
         return item
+"""

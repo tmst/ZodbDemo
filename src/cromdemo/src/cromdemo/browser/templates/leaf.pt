@@ -1,5 +1,5 @@
 <div id="leaf">
-  <h1 tal:content="context.title" />
+  <h1 tal:content="context.__name__" />
   <p tal:content="context.body" />
   <a tal:attributes="href view.url() + '/protected'">
     Access the protected view

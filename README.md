@@ -161,5 +161,6 @@ it will allow you to use PDB without problems.
 You can also reduce the number of workers to 1.
 Use the option -p 1
 
- uwsgi --http :8080 --wsgi-file -p 1 --honour-stdin server.py
- 
+ uwsgi --http :8081  -p 1 --honour-stdin --wsgi-file server.py
+
+Note that port 8081 works for me, you may want a different port number. 

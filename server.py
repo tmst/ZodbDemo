@@ -15,22 +15,15 @@ def get_key(path):
         key = JWTHandler.load_key_file(path)
     return key
 
-def init_db(db):
-    import pdb;pdb.set_trace()
 
-    with Configuration('config.json') as config:
+def init_db(db):
+    with PythonConfiguration('config.json') as config:
        """We create two leaves here.. We get the DB connection object.
        We need to open and to close it. It doesn't need to return anything.
        Make sure to use a transaction manager to have it correctly persisted.
        """
-       from dolmen.container.components import BTreeContainer
-       conn = environ["zodb.connection"].get_connection('demo')
-       root = conn.root()
-       root['node1']=BTreeContainer()
-       root['node2']=BTreeContainer()
-       print  ("NAME",root['node1'].__name__)
-       import transaction
-       transaction.commit()
+       pass
+   
 
 
 with PythonConfiguration('config.json') as config:
@@ -73,7 +66,7 @@ with PythonConfiguration('config.json') as config:
     
     from cromlech.zodb.middleware import ZODBApp
     from cromdemo.app import demo_application
-    zodb_wraooed_app =ZODBApp(demo_application, db, key="zodb.connection")
-    application =session_wrapper(zodb_wraapped_app)
+    zodb_app =ZODBApp(demo_application, db, key="zodb.connection")
+    application =session_wrapper(zodb_app)
 
 
