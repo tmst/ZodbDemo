@@ -25,7 +25,6 @@ logins = {
 
 
 def query_view(request, context, name=""):
-    import pdb;pdb.set_trace()
     view = IView.component(context, request, name=name)
     return view(context, request)
 
