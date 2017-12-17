@@ -23,26 +23,12 @@ class Root(BTreeContainer):
 
     
 @implementer(ILeaf)
-class Leaf(Location):
+class Leaf(BTreeContainer):
 
     def __init__(self, title, body):
+        BTreeContainer.__init__(self)
         self.title = title
         self.body = body
 
-"""
-@implementer(IPublicationRoot)
-class Root(BTreeContainer):
 
-    title = u"Demo Root"
 
-    def __init__(self, *args, **kwargs):
-        dict.__init__(self, *args, **kwargs)
-        self['green'] = Leaf(u'Green leaf', u'A summer leaf')
-         self['yellow'] = Leaf(u'Yellow leaf', u'An automn leaf')
-
-    def __getitem__(self, key):
-        item = dict.__getitem__(self, key)
-        if item is not None:
-            locate(item, self, key)
-        return item
-"""

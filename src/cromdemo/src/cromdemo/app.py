@@ -13,8 +13,6 @@ from cromlech.security import component_protector
 from cromlech.security import unauthenticated_principal
 from cromlech.webob.request import Request
 
-from .models import Root
-
 from .auth import secured
 
 
@@ -46,18 +44,7 @@ def sessionned(app):
 
 
 
-def init_db(conn):
-       #import pdb; pdb.set_trace()
-       root = conn.root()
-       if not hasattr(root,'applicationRoot'):
-          root.applicationRoot=Root()
-          root.__name__='root'
-          #root['node1']=BTreeContainer()
-          #root['node2']=BTreeContainer()
-          #print  ("NAME 1",root['node1'].__name__)
-          #print  ("NAME 2",root['node2'].__name__)
-          import transaction
-          transaction.commit()        
+
 
 
 
@@ -77,9 +64,7 @@ def demo_application(environ, start_response):
     def publisher(environ, start_response):
         with EnvironLocale(environ):
             conn = environ["zodb.connection"] 
-            init_db(conn)
             request = Request(environ)
-            #root = Root()
             root=conn.root()
             root=root.applicationRoot
             

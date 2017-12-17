@@ -22,8 +22,17 @@ def init_db(db):
        We need to open and to close it. It doesn't need to return anything.
        Make sure to use a transaction manager to have it correctly persisted.
        """
-       pass
-   
+       from cromdemo.models import Root, Leaf
+       conn = db.open()
+       root = conn.root()
+       if not hasattr(root,'applicationRoot'):
+          appRoot=Root()
+          root.applicationRoot=appRoot
+          appRoot.__name__='root'
+          appRoot['green'] = Leaf(u'Green leaf', u'A summer leaf')
+          appRoot['yellow'] = Leaf(u'Yellow leaf', u'An automn leaf')
+          import transaction
+          transaction.commit()           
 
 
 with PythonConfiguration('config.json') as config:

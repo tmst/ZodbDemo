@@ -51,7 +51,7 @@ python app.py
 You can then insert breakpoints or do whatever you want.
 
 But say you want to write a script that runs in a cron job.
-It is pretty easy to do that also.  Just modify app.py
+It is pretty easy to do that also.  Just modify server.py
 By reading the path variales from a JSON file, Cromlech makes it
 very easy to create multiple scripts which all work in the same environment. 
 .
