@@ -6,6 +6,7 @@ from loader import PythonConfiguration
 
 def get_key(path):
     from cromlech.jwt.components import JWTHandler
+
     if not os.path.isfile(path):
         with open(path, 'w+', encoding="utf-8") as keyfile:
             key = JWTHandler.generate_key()
@@ -51,10 +52,10 @@ with PythonConfiguration('config.json') as config:
         db = init_db_from_file(fd, init_db)
         
     # Getting the crypto key and creating the JWT service
-    from dolmen.sessions.jwt import JWTCookieSession
+    from cromlech.sessions.jwt import JWTCookieSession
     key = get_key(config['session']['jwt_key'])
     session_wrapper = JWTCookieSession(
-        key, int(config['session']['timeout'])).wrapper
+        key, int(config['session']['timeout']))
     
     # read the ZCML
     from cromlech.configuration.utils import load_zcml
