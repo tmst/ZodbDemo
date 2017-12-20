@@ -147,9 +147,3 @@ on this
 software really care about it, and want you to have a good experience.  We 
 invite you to try it out.  Just be nice in your feedback. 
 
-There are additional docs [here](./src/cromdemo/docs) including 
-a longer   [article](./src/cromdemo/docs/article.md).
-
-You will probaly need to understand the [webob api](https://docs.pylonsproject.org/projects/webob/en/stable/reference.html)
-
-And read the [list of packages](http://trac.dolmen-project.org/wiki/technical-overview)
