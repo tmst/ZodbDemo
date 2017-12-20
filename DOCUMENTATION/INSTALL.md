@@ -5,21 +5,30 @@ Installation instructions are below.
 For python2.7+
 --------------
 
-```bash
+```
+bash
 $> git clone https://github.com/PythonLinks/CromlechDemo
-$> virtualenv . && source bin/activate
+$> virtualenv .
+$> source bin/activate
 $> python bootstrap.py
 $> ./bin/buildout
 $> pip install uwsgi
 $> uwsgi --http :8080 --wsgi-file server.py
 ```
 
+
 For python3.3+
 --------------
 
-```bash
+```
+bash
 $> git clone https://github.com/PythonLinks/CromlechDemo
-$> pyvenv . && source bin/activate
+$> pyvenv .
+
+#  OR WHAT I HAD TO DO ON LINUX FOR PYTHON 3
+#  virtualenv -p /usr/bin/python3 .
+
+$> source bin/activate
 $> python bootstrap.py
 $> ./bin/buildout
 $> pip install uwsgi
