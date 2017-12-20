@@ -1,12 +1,17 @@
 Cromlech Introduction AND DEMO
 =====================
 
-Cromlech is a toolkit and a great way to build applications on top
-of the Z Object Database.
+Cromlech is a toolkit for building applications in Python. This demo
+shows how to build a wsgi application, but it also
+works without wsgi, either as a Python Script or even behind an asyncio or
+Tornado server.  Cromlech supports both routing and traversal.  It supports
+view lookup on objects.  It supports sessions, and security. I recommend
+Cromlech as the best way to build applications on top of the Z Object
+Database.  
 
 
-There is lots of documentation [here](./src/cromdemo/docs)
-including 
+There is lots of documentation [here](./src/cromdemo/docs).
+You may want to start with 
 a longer   [article](./src/cromdemo/docs/article.md) submitted to
 PyCON USA 2018.
 
