@@ -21,4 +21,10 @@ You will probaly need to understand the [webob api](https://docs.pylonsproject.o
 
 And read the [list of packages](http://trac.dolmen-project.org/wiki/technical-overview)
 
+Please note that for historic and commercial reasons we are building this on
+the crom branch of most of the cromlech packages.
+
+In general Cromlech has great detailed documentation, but it is all hidden
+in the doc tests.  So always look for it there.
+
 

@@ -23,15 +23,11 @@ Once you have found the object, views are looked up using a component registry. 
 
 Zopache registers the views on basic web objects  for you.  These include HTML, CSS and Javascript objects.
 
-Cromlech builds on Zope.security.  zope.security has a concept of principals. who have permissions.  Cromlech allows one to wrap either views or objects in security proxies.  They can then only be accessed if the current principal has the correct permissions.  Otherwise an exception is thrown, and usually the application redirects to a login page.
+
+Like zope.security, Cromlech has a concept of principals. who have permissions.  Cromlech allows one to wrap either views or objects in security proxies.  They can then only be accessed if the current principal has the correct permissions.  Otherwise an exception is thrown, and usually the application redirects to a login page. 
 
 Zopache simplifies this.  The admin user (principal) has CRUD permission, the anonymous user has only view permission.  That is typical for most
 early-stage websites.
-
-If you want a richer security model,
-Zope.securitypolicy provides a rich security framework.  Principals  and groups of principals have roles.  Principals, Groups and roles can be granted or denied permissions either globally or on arbitrary
-branches of a ZODB tree.  My website PythonLinks.info is based on
-zope.securitypolicy.  I love it.
 
 There are two times when security proxies are accessed.  If a view is wrapped in a  security proxy, then when the view is called, the security proxy is first executed.  If there is permission the view is executed, if not an exception is thrown and the user is usually redirected to a login panel.
 
