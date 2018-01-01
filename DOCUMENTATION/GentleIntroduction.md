@@ -5,7 +5,7 @@ So what does all of this software do?
 
 Here are the detailed [Installation Instructions](./INSTALL.md).
 
-When you first download this there is a file called bootstrap.py.
+When you first download this there is a file in the root called bootstrap.py.
 First createa a virtualenv, then 
 you run
 python bootstrap.py to create bin/buildout.

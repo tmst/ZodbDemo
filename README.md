@@ -26,7 +26,7 @@ Next up Cromlech defines publishers and Publication Root.  An object
 pulisher starts at the publication root, traverses to an object, 
 displays a view on it, and returns the Response.
 And of course Cromlech defines the interfaces for  Forms, Templates URLs
-and sesions. 
+and sessions. 
 
 This demo shows how to build a wsgi application using the ZODB,
 but Cromlech  also can work without wsgi and without the ZODB,
@@ -39,9 +39,9 @@ You may now want to go and read all  [about the demo](./DOCUMENTAION/GentleIntro
 
 ## USEFUL LINKS
 
-There is lots of documentation [here](./src/cromdemo/docs).
+There is lots of documentation [here](./DOCUMENTATION).
 You may want to start with 
-a longer   [article](./src/cromdemo/docs/article.md) submitted to
+a longer   [article](./DOCUMENTATION/article.md) submitted to
 PyCON USA 2018.
 
 

@@ -43,4 +43,9 @@ Use the option -p 1
 Here is the command I use. 
  uwsgi --http :8081  -p1  --honour-stdin --wsgi-file server.py
 
-Note that port 8081 works for me, you may want a different port number. 
+Note that port 8081 works for me, you may want a different port number.
+
+And when you download a new versoin use the commands
+bin/develop update
+
+to update all the packages which have been downloaded. 

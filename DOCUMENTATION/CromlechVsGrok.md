@@ -13,20 +13,23 @@ daily development use by its author Souheil, and by the author of this
 Documentation Christoher Lozinski.
 
 How does Cromlech differ from Grok? Both are based on the ZTK. Both have
-object publishers.  Both use zope.security.  Both have a component registry.
+object publishers.    Both have a component registry.
 Both have security on views.  But Grok is really a massive monolithic
 framework, while Cromlech has done the miraculous job of
 separating out the different pieces into a toolkit.  With Grok you
 have to hae a ZODB.  You add applications.  Applications  have sites.  Sites
-have registries, and users.  There is a big complexity overhead required by
-Grok.
+have registries, and users.  All of that stuff is required.
+There is a big complexity overhead required by Grok. In contrast,
+in Cromlech, you only use what you need. 
 
 Cromlech is a toolkit, you get control over how you structure your
 applications. Choose those pieces which you want.
-At first I did not believe it possible, but the more I dug, the more I realized
+At first I did not believe it possible, but the more I dug,
+the more I realized
 it to be true.  Cromlech does not even require a ZODB, It can use one or
 more root ZODB's. it can use dispatch, it can use traversal, it can dispatch,
-and then traverse.   Cromlech can run as a WSGI server, a stand alone app, or a
+and then traverse.   Cromlech can run as a WSGI server, a stand alone app,
+or a
 async (such as Tornado) server.  Awesome.  Like ZTK Cromlech is a toolset.
 But it also has this demo which you can start with. 
 
@@ -59,10 +62,10 @@ WEbOb is much more mature.
 
 The next big difference is in the security model.  The
 modern way to do security is security on views.
-Zope.Pulisher also does security on object access.
+Zope.Publisher also does security on object access.
 So Grok has to patch that leading to a lot of additional complexity.
 Cromlech takes the simpler approach of directly doing security on views.
-Cromlech also lets you can optionally add in security on object access.
+Cromlech also lets you  optionally add in security on object access.
 So Cromlech has optional security on view and model objects. 
 
 Cromlech uses Zeam.form, while Grok uses
@@ -73,17 +76,19 @@ course zeam.form can also be used with Grok or Plone.  I should note that
 the Cromlech version of zeam.form, is sllightly different from the regular
 version, it uses the cromlech registry. 
 
-Cromlech has a very simple, yet powerful security and authentication  model.
-Before beginning traversal wrap the Publication class in session decorator.  If
-approprite it defines the principle. 
 
-Cromlech has a new component registry.
-While it is plug compatible with the old registry, it allows for chaining of
+Before beginning traversal wrap the Publication class in session decorator.
+If
+appropriate it defines the principal. 
+
+Cromlech has a new component registry. It uses the registry in
+zope.interface, but discards zope.component.
+It allows for chaining of
 registries.  Think a tree of registries. In contrast Grok has both local and
 global registeries.  The Cromlech approach makes more sense.
 
 Cromlech startup is a bit different than Grok.  Grok just had one way to
-start up.  This Cromlech demo has an setup.py file which
+start up.  This Cromlech demo has an server.py file which
 configures your startup. It gives you a much more flexible  approach
 than the grok approach. 
 
@@ -123,18 +128,21 @@ In many cases you do not have to do anything,
 inheritance does it for you.  It looks just like regular code.  But of 
 course open source is written by the senior developers, for the senior 
 developers, so Martian has sadly mostly passed out of use.  
-For those who do prefer Martian, the good news is that it is already running on
+For those who do prefer Martian, the good news is that it is already
+running on
 Python 3.  But there are many special grokkers in Grok, and reportedly as of 
 middle 2017, not all of them work  with Martian on Python 3. 
 
 Once I figure out the Cromlech libraries, it should not be that 
-hard to port a Grok application over.  It should e reasonably doable to port Grok Model Objects and views to
+hard to port a Grok application over.  It should e reasonably doable to
+port Grok Model Objects and views to
 Cromlech.My hope is that porting a Grok 
 application to Cromlech will only require upgrading a few grok packages to 
 Python 3.  Time will tell. 
 
 Is Cromlech perfect?  Well no.  The biggest prolem is the lack of 
-documentations.  The author has put his focus on the code.  
+introductory documentations.  The author has put his focus on the code, and
+written lots of docs in the doc tests, but you have to search to find them. 
 So I am busy writing documentation. If
 you are a grok or zope developer, then you understand the basic concepts. 
 There is enough documentation here to get you oriented and started.  
@@ -144,6 +152,5 @@ a world
 view of how software should be done.  Our professional identiies are tied up 
 with this work.  Very much a labor of love.  Those of us who are working 
 on this 
-software really care about it, and want you to have a good experience.  We 
-invite you to try it out.  Just be nice in your feedback. 
+software really care about it, and want you to have a good experience.  
 
