@@ -6,7 +6,6 @@ from loader import PythonConfiguration
 
 def get_key(path):
     from cromlech.jwt.components import JWTHandler
-
     if not os.path.isfile(path):
         with open(path, 'w+', encoding="utf-8") as keyfile:
             key = JWTHandler.generate_key()
