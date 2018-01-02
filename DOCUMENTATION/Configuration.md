@@ -2,10 +2,9 @@
 
 Cromlech is a set of tools which you can string together any way you want.
 
-The way that the demo strings them together is in a file called app.py. 
+The way that the demo strings them together is in a file called server.py. 
 
-App.py loads everything which is needed.  It bootstraps the application.
-
+Server.py loads everything which is needed.  It bootstraps the application.
 
 You can call app.py from a WSGI server, from an Async server such as Tornado,
 or from the command line, maybe in a debugging session.  Maybe you would
@@ -36,12 +35,17 @@ You can either route to different applications.
      router['/demo1'] = demo1
 
 And then tell the middleware how to access the application.
+If you are using the ZODB, then you want to use the ZODB wrapper.
+    import cromlech.zodb.middleware.ZODBApp
     application = ZODBApp(router, db, key="zodb.connection")
 
 Or if you just have one application
 application = ZODBApp(demo1, db, key="zodb.connection")
 
-There are a few other commands in app.py, but these are the most important
+ZODGApp  gets a connection the database,
+and stores it in the Environ Variables.
+
+There are a few other commands in server.py, but these are the most important
 ones. 
 
 When you want to work from the terminal, 
@@ -55,3 +59,22 @@ It is pretty easy to do that also.  Just modify server.py
 By reading the path variales from a JSON file, Cromlech makes it
 very easy to create multiple scripts which all work in the same environment. 
 .
+Session Wrappers
+----------------
+HTTP is a stateless protocol, so sessions are used to keep track
+of logged in users.  When the HTTP request arrives, the server needs
+to figure out who the user is.  There are several ways to do it.
+Identity information can be encrypted in a Java Web Token inside a
+cookie.  Use:
+    
+cromlech.sessions.jwt.JWTCookieSession
+
+You can slso store the credentials on the file system.  Use
+    https://github.com/Cromlech/cromlech.sessions.file
+
+Or you can store the credentials in the ZODB.  USe zope.session
+
+Thee is also [cromlech.sessions.redis](https://github.com/Cromlech/cromlech.sessions.redis) but it does not yet have a Crom branch.
+
+And of course take a looka at [cromlech.sessions](https://github.com/Cromlech/cromlech.sessions) 
+

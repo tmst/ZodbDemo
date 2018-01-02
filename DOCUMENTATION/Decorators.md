@@ -1,38 +1,11 @@
-CROMLECH DECORATORS, WRAPPERS AND CONFIGURATION
+CROMLECH Decorators
 ==================================
 
 Let us start with wrappers.  Things that wrap around another function.
 
 
-##Setup.py
-
-###Session Wrappers
-    HTTP is a stateless protocol, so sessions are used to keep track
-    of logged in users.  When the HTTP request arrives, the server needs
-    to figure out who the user is.  There are several ways to do it.
-    Identity information can be encrypted in a Java Web Token inside a
-    cookie.  Use:
-    
-    cromlech.sessions.jwt.JWTCookieSession
-
-    You can slso store the credentials on the file system.  Use
-    https://github.com/Cromlech/cromlech.sessions.file
-
-    Or you can store the credentials in the ZODB.  USe zope.session
-
-    Thee is also [cromlech.sessions.redis](https://github.com/Cromlech/cromlech.sessions.redis) but it does not yet have a Crom branch.
-
-   And of course take a looka at [cromlech.sessions](https://github.com/Cromlech/cromlech.sessions) 
-
-### ZODB Wrapper
-
-   If you are using the ZODB, then you want to use the ZODB wrapper.
-    cromlech.zodb.middleware.ZODBApp
-
-   It gets a connection the database, and stores it in the Environ Variables.
-
-##APPLICATION DECORATORS
-
+APPLICATION DECORATORS
+---------------------
 Cromlech has a lot of decorators   Some are used for
 configuration.  This
 document explains what is going on.
@@ -57,7 +30,8 @@ context class, URL segment and request type (Post or Get).
 First we will do pure decorators, no
 configuration. Then the configuration decorators.
 
-#Security Decorators
+Security Decorators
+------------------
 You can optionally wrap view and model objects in security decorators. When
 you try to call a view, the security machinery is invoked.  If the user
 does not hae the right permissions, an error is thrown, and usually a login
@@ -70,14 +44,16 @@ to start is in [security.py](../src/cromdemo/src/cromdemo).
 
 Also take a look at [cromlech.security](https://github.com/Cromlech/cromlech.security/tree/crom)
 
-##Configuration Decorators
-  When the application is first started, the code is scanned to read in
+Configuration Decorators
+------------------------
+When the application is first started, the code is scanned to read in
   configuratin information.  That informaiton is stored in the cromlech
   component registry.  The information is defined using the following
   decorators. 
 
-###View Decorators
-  Well these are the most important configuration decorators.  They define
+View Decorators
+-----------------
+Well these are the most important configuration decorators.  They define
 who can see which view.  Here are several.
   
 @view_component
@@ -117,14 +93,6 @@ who can see which view.  Here are several.
 In general Cromlech has great detailed documentation, but it is all hidden in the doc tests. So always look for it there.
 
 
-### GROK CONFIGURATOIN
-I should point out that Grok had the same concept of configuration in code.
-They used somethign called Martian, where the configuration code looked just
-like souce code.  And it did inheritance properly.  This was very easy for
-beginners to Grok, hence the name.  But the senior develoeprs prefer explicit
-over implicit, they prefer not to have the inheritance, they want to
-explicitely define things. they prefer the
-performance and simplicity advantage of the Venutian approach.  But Martian
-has been ported to Python 3, and in due course it will be added in here.
+
 
 
