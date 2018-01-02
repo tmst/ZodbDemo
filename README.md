@@ -37,11 +37,12 @@ view lookup on objects.  It supports sessions, and security.
 You may now want to go and read all  [about the demo](./DOCUMENTAION/GentleIntroduction.md)
 
 
-## USEFUL LINKS
+USEFUL LINKS
+-------------
 
 There is lots of documentation [here](./DOCUMENTATION).
 You may want to start with 
-a longer   [article](./DOCUMENTATION/article.md) submitted to
+a longer   [article](./DOCUMENTATION/Article.md) submitted to
 PyCON USA 2018.
 
 
@@ -60,7 +61,8 @@ You may want to better understand [webob](https://docs.pylonsproject.org/project
 And read the [list of packages](http://trac.dolmen-project.org/wiki/technical-overview)
 
 
-##NOTES
+NOTES
+---------
 
 Please note that for historic and commercial reasons we are building this on
 the crom branch of most of the cromlech packages.

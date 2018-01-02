@@ -1,4 +1,5 @@
 Here is documentation on [server.py](../server.py)
+---------------------------
 
 In server.py  is something called PythonConfiguration.
 It imports config.json to create
@@ -14,5 +15,5 @@ loader.py creates the Python Path using the files in config.json
 
 In server.py the server is configured.
 Cromlech is a toolkit.  There are many
-ways to configure it.  [This](./server.md)
+ways to configure it.  This 
 is but one possible configuration.

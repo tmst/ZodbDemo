@@ -41,14 +41,8 @@ Here is what it would look like.
 /blogger2
    contact
    posting1
-posting2
+   posting2
 ```
-
-Flask is a very stripped down web framework.  Pyramid also.  In contrast the
-Zope world provides a much richer vocabulary for building websites, and
-Cromlech does something I had not thought possible, it breaks it down into
-a toolkit, where the individual components can be used separately from each
-other.
 
 On the ease of use side, Django is pretty good.  It has tools for bringing
 up applications quite easily.  Flask, I believe does not.  Pyramid has

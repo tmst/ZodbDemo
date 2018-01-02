@@ -61,7 +61,7 @@ Zope and grok were massive frameworks,  you could not throw out any part.
 
  The first thing one does in Cromlech is to configure the server.  I will show you the configuration file for Zopache, and explain what every line does.
 
-Here is a description of the  [configuration file](https://github.com/PythonLinks/CromlechDemo/blob/master/src/cromdemo/docs/configuration.txt).  It will be included in this talk.
+Here is a description of the  [configuration file](https://github.com/PythonLinks/CromlechDemo/blob/master/configuration.txt).  It will be included in this talk.
 
 Competition.
 [Here ](https://github.com/PythonLinks/CromlechDemo/blob/master/DOCUMENTATION/CromlechVsDjango.md)
