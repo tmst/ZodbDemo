@@ -2,6 +2,7 @@ Comparison of Cromlech and Pyramid
 =================================
 
 So why not just use Pyramid?  Pyramid is both too simple and too complex.
+Worse yet, Pyramid really only serves wsgi sites.
 
 Pyramid is too complex, becasue it is an entire framework.  You have to
 import all of Pyramid. Or at least most of it.  In contrast Cromlech is

@@ -5,19 +5,45 @@ So what does all of this software do?
 
 Here are the detailed [Installation Instructions](./INSTALL.md).
 
-When you first download this there is a file in the root called bootstrap.py.
-First createa a virtualenv, then 
-you run
-python bootstrap.py to create bin/buildout.
+OBJECT MODEL
+------------
 
-When you run bin/buildout, it downlaods all the required software, and creates
-all the files and directories needed to run the application.
-In particular it creates config.json, which includes all the Python Path
-information.
+We basically have two object types.  Containers and Leafs.  A container can
+contain other things.  Leaves cannot.  The current demo only has one
+container, at the root.  I am working to be able to add more containers.
+And leaves can be added to containers, but not to leaves.
 
-Now that it is installed,  what does  Cromlech actually do?
+There are two major views, and a number of minor views.  All views
+are represented by Python Objects.  The display
+may be defined in Python or in a
+page template.
 
-In the package root, server.py configures the server.  loader.py
+The two major views are the Collection (Or root) view, and the leaf view.
+There are a numer of sub views. Tabs are used in the leaf view.  One can
+view a leaf, edit a leaf, or possibly see the protected subview. I think
+that there is also a user sub view, which shows you the logged in user. 
+
+And then there are the form views.  One form to login.  One form to edit a
+leaf.  Soon we will have a form to add leaves and another form to
+add containers. 
+
+Let us take a look at the layout templates.  
+
+layout.pt is the leaf  layout.
+
+tabs.pt is a set of tabs across the top of the screen.
+
+leaf.pt displays a leaf. 
+
+home.pt shows the root container view. 
+
+Server Configuration
+-------------------
+
+The demo is not just an object model, it also
+configures the application server. 
+
+In the package root, server.py configures the application server.  loader.py
 loads the Python Path using config.json.  You can read more about them
 [here](./server.md)
 
@@ -78,37 +104,8 @@ environ[“username”]= uername
 
 If there is a username, it then creates a principal.
 
-#OBJECT MODEL
-We basically have two object types.  Containers and Leafs.  A container can
-contain other things.  Leaves cannot.  The current demo only has one
-container, at the root.  I am working to be able to add more containers.
-And leaves can be added to containers, but not to leaves.
-
-There are two major views, and a number of minor views.  All views
-are represented by Python Objects.  The display
-may be defined in Python or in a
-page template.
-
-The two major views are the Collection (Or root) view, and the leaf view.
-There are a numer of sub views. Tabs are used in the leaf view.  One can
-view a leaf, edit a leaf, or possibly see the protected subview. I think
-that there is also a user sub view, which shows you the logged in user. 
-
-And then there are the form views.  One form to login.  One form to edit a
-leaf.  Soon we will have a form to add leaves and another form to
-add containers. 
-
-Let us take a look at the layout templates.  
-
-layout.pt is the leaf  layout.
-
-tabs.pt is a set of tabs across the top of the screen.
-
-leaf.pt displays a leaf. 
-
-home.pt shows the root container view. 
-
-
+FILE SYSTEM STRUCTURE
+====================
 Okay, now let us take a loot at the structure of the software.
 
 Here are the files.

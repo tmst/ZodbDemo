@@ -1,37 +1,56 @@
+Installation instructions with Explanation
+========================
 
+These are installation instructions assuming that you have a unix server.
+First fire up bash, then get a copy of the git repository.
 
-Installation instructions are below.
+```
+bash
+$> git clone https://github.com/PythonLinks/CromlechDemo
+```
+
+Now we install a virtual env.
 
 For python2.7+
---------------
 
 ```
-bash
-$> git clone https://github.com/PythonLinks/CromlechDemo
 $> virtualenv .
 $> source bin/activate
-$> python bootstrap.py
-$> ./bin/buildout
-$> pip install uwsgi
-$> uwsgi --http :8080 --wsgi-file server.py
-```
 
+```
 
 For python3.3+
---------------
 
 ```
-bash
-$> git clone https://github.com/PythonLinks/CromlechDemo
 $> pyvenv .
 
 #  OR WHAT I HAD TO DO ON LINUX FOR PYTHON 3
 #  virtualenv -p /usr/bin/python3 .
 
 $> source bin/activate
-$> python bootstrap.py
-$> ./bin/buildout
-$> pip install uwsgi
+```
+
+
+When you first download this there is a file in the root called bootstrap.py.
+you run
+```
+$>python bootstrap.py 
+```
+to create bin/buildout.
+
+Then you run
+```
+$>bin/buildout
+```
+
+, it downlaods all the required software, and creates
+all the files and directories needed to run the application.
+In particular it creates config.json, which includes all the Python Path
+information.
+
+
+And now we run the application.
+```
 $> uwsgi --http :8080 --wsgi-file app.py
 ```
 To debug the uwsgi easily, just use : --honour-stdin, in the
@@ -46,6 +65,8 @@ Here is the command I use.
 Note that port 8081 works for me, you may want a different port number.
 
 And when you download a new versoin use the commands
-bin/develop update
+```
+$>bin/develop update
+```
 
 to update all the packages which have been downloaded. 
