@@ -6,6 +6,8 @@ This package provide that.  There are four classes represented here.
 Display, Add, Edit, Delete, and 4 actions
 AddAction, UpdateAction, DeleteAction, CancelAction
 
+You can read the [dolmen.forms.curd](https://github.com/Cromlech/dolmen.forms.crud/tree/master/src/dolmen/forms/crud) documentation.
+
 We have to define the class we are going to operating on.  But first we
 have to define its interface.
 
