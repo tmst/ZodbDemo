@@ -54,7 +54,7 @@ Souheil prioritized software over documentation, so they were hard to access.
 It turns out that Cromlech actually includes lots of detailed
 documentation, but
 it is all hidden in the doc tests.
-I have been busy writing [high level introduction docs](.).
+I have been busy writing [high level introduction docs](./).
 
 So what is the bottom line?
 
