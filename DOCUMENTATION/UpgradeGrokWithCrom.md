@@ -1,9 +1,11 @@
-Cromlech provides an upgrade path for Grok applicatoins. 
+Cromlech provides an upgrade path for Grok applications. 
+=======================
 
 Cromlech is a close relative of Grok (and Dolmen).
 It was written by Souheil Chellfou a major contributor to Grok.
 https://pypi.org/user/trollfot/ Cromlech is in production use in a
-German company which is supporting it on an ongoing basis.
+German company which is supporting both Cromlech and Souheil
+on an ongoing basis.
 
 There are two version of Cromlech. The master branch is very Grok compatible.
 The crom branch is running on Python 3.
@@ -19,10 +21,6 @@ say, man this is so much better than the Grok version.
 Grok is a framework: each piece needs
 the other pieces.  In contrast,  Cromlech is a library,
 the pieces are quite separate. I would not have thought it possible.
-
-I do not know as much about the Master branch of Cromlech.  
-I am just about to dig into it.  It is still in
-Python 2, but is quite grok compatible. 
 
 I see two  ways of using Cromlech to
 upgrade Grok.  
@@ -44,12 +42,11 @@ the zope.interface registration.  That makes sense to me.
 The next
 biggest difference is that Cromlech uses Venutian Decorators rather than
 Grok's martian declarations.  Actually Martian is already in Python 3,
-so it should be reasonably easy to port it to Crom. Zeam.form
-has already been ported to the Crom Registry.
+so it should be reasonably easy to port it to Crom. 
 
 The third issues is that Crom uses zeam.form rather than zc.form and
 z3c.form.  Not that much difference there really, just fewer adaptors.
-
+Zeam.form has already been ported to the Crom Registry.
 
 What about Documentation?
 Historically
@@ -57,8 +54,7 @@ Souheil prioritized software over documentation, so they were hard to access.
 It turns out that Cromlech actually includes lots of detailed
 documentation, but
 it is all hidden in the doc tests.
-I have been busy writing [high level introduction docs](..).
-
+I have been busy writing [high level introduction docs](.).
 
 So what is the bottom line?
 
