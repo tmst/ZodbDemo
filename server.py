@@ -4,17 +4,6 @@ import os
 from loader import PythonConfiguration
 
 
-def get_key(path):
-    from cromlech.jwt.components import JWTHandler
-    if not os.path.isfile(path):
-        with open(path, 'w+', encoding="utf-8") as keyfile:
-            key = JWTHandler.generate_key()
-            export = key.export()
-            keyfile.write(export)
-    else:
-        key = JWTHandler.load_key_file(path)
-    return key
-
 
 def init_db(db):
     with PythonConfiguration('config.json') as config:
@@ -51,8 +40,10 @@ with PythonConfiguration('config.json') as config:
         db = init_db_from_file(fd, init_db)
         
     # Getting the crypto key and creating the JWT service
-    from cromlech.sessions.jwt import JWTCookieSession
-    key = get_key(config['session']['jwt_key'])
+    from cromlech.sessions.jwt import key_from_file
+    from cromlech.sessions.jwt import JWTCookieSession 
+
+    key = key_from_file(config['session']['jwt_key'])
     session_wrapper = JWTCookieSession(
         key, int(config['session']['timeout']))
     

@@ -1,28 +1,36 @@
 # -*- coding: utf-8 -*-
 
 import crom
-
-from . import tal_template
 from cromlech.browser import IRequest, ILayout
 from cromlech.i18n import getLocale
 from cromlech.security import permissions
 from cromlech.webob.response import Response
 from dolmen.viewlet import ViewletManager, viewlet_manager
-from zope.interface import Interface, implementer
-from cromlech.security import IProtectedComponent
+from zope.interface import Interface
+
+from . import tal_template
 
 
 @viewlet_manager
-@permissions('ViewProtected')
-@implementer(IProtectedComponent)
-class ProtectedHeader(ViewletManager):
-    """Priviledied user only manager
+class SiteHeader(ViewletManager):
+    pass
+
+
+@viewlet_manager
+@permissions('Manage')
+class AdminHeader(ViewletManager):
+    """Authorized user only
     """
     pass
 
 
 @viewlet_manager
 class ContextualActions(ViewletManager):
+    pass
+
+
+@viewlet_manager
+class Footer(ViewletManager):
     pass
 
 
@@ -44,8 +52,8 @@ class LiteLayout(object):
     def namespace(self, **extra):
         namespace = {
             'context': self.context,
-            'request': self.request,
             'layout': self,
+            'request': self.request,
             }
         namespace.update(extra)
         return namespace

@@ -1,28 +1,45 @@
 # -*- coding: utf-8 -*-
 
-from . import ITab, Form
-from ..models import ILeaf, ILogin
-from ..auth import Auth
-
+import uuid
 from crom import target, order
-from dolmen.forms.base import name, context, form_component
-from dolmen.forms.base import Fields, Action, Actions, FAILURE
+from cromlech.browser import IURL
 from cromlech.browser.exceptions import HTTPFound
-from cromlech.security import IProtectedComponent
-from zope.interface import implementer
+from cromlech.browser.interfaces import IPublicationRoot
+from cromlech.browser.directives import title
+from cromlech.security import permissions
+from dolmen.forms.base import Fields, FAILURE
+from dolmen.forms.base import action, name, context, form_component
+from dolmen.forms.base import apply_data_event
+from dolmen.forms.base.errors import Error
+
+from . import ITab, Form
+from ..auth import Auth
+from ..models import Leaf, ILeaf, ILogin
 
 
-class LoginAction(Action):
+@form_component
+@name('add.leaf')
+@context(IPublicationRoot)
+@target(ITab)
+@order(50)
+@title("Add a leaf")
+@permissions('Manage')
+class AddLeaf(Form):
 
-    def available(self, form):
-        return True
+    fields = Fields(ILeaf)
+    ignoreContent = True
 
-    def __call__(self, form):
-        data, errors = form.extractData()
+    @action('Add')
+    def add(self):
+        data, errors = self.extractData()
         if errors:
-            form.submissionError = errors
+            form.errors = errors
             return FAILURE
-        raise HTTPFound(form.request.url)
+
+        uid = str(uuid.uuid4())  # a simple UUID id to avoid conflict.
+        content = Leaf(data['title'], data['body'])
+        self.context[uid] = content
+        raise HTTPFound(IURL(self.context, self.request))
 
 
 @form_component
@@ -30,18 +47,50 @@ class LoginAction(Action):
 @context(ILeaf)
 @target(ITab)
 @order(20)
+@title("Edit the content")
+@permissions('Manage')
 class Edit(Form):
+
     fields = Fields(ILeaf)
+    ignoreContent = False
+
+    @action('Apply')
+    def apply(self):
+        data, errors = self.extractData()
+        if errors:
+            form.errors = errors
+            return FAILURE
+
+        content = self.getContent()
+        apply_data_event(self.fields, content, data)
+        raise HTTPFound(IURL(content, self.request))
 
 
 @form_component
 @name('login')
 @context(Auth)
-@implementer(IProtectedComponent)
 class Login(Form):
+
     fields = Fields(ILogin)
-    actions = Actions(LoginAction(u'Log me'))
+    ignoreContent = True
 
     @property
     def action_url(self):
         return self.request.url
+
+    @action('Log me')
+    def login(self):
+        data, errors = self.extractData()
+        if errors:
+            form.errors = errors
+            return FAILURE
+
+        success = self.context.authenticate(
+            data['username'], data['password'])
+        if not success:
+            self.errors.append(Error(
+                title='Login failed',
+                identifier=self.prefix,
+            ))
+            return FAILURE
+        raise HTTPFound(self.request.url)
