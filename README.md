@@ -1,4 +1,4 @@
-[ZODB + Cromlech  Introduction and Demo](#Introduction)
+[ZODB + Cromlech  Introduction and Demo](#introduction)
 =====================
 
 This demo showcases a small subset of what is possible with Cromlech and the
