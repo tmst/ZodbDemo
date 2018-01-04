@@ -16,7 +16,8 @@ the crom branch demo.  github.com/pythonlinks/CromlechDemo
 The crom branch is a very impressive piece of work.  Souheil has spent the
 last 10 years cleaning up and refactoring
 Grok. Crom has the same concepts as Grok, but a
-much cleaner implementation. Time after time I read the code, and
+much cleaner implementation. 
+Time after time I read the code, and
 say, man this is so much better than the Grok version.
 Grok is a framework: each piece needs
 the other pieces.  In contrast,  Cromlech is a library,
@@ -28,7 +29,7 @@ The first  is to use the master Cromlech
 branch as is. I believe what that does is toss out zope.publisher, and
 zope.app.publisher, and replaces them with a Dawnlight publisher.
 It would aslo have to replace grok.view. 
-Dawnlight is based on webob, and uses the uwsgi software stack.
+Dawnlight is based on webob, and uses the wsgi software stack.
 https://github.com/Cromlech/cromlech.dawnlight
 The docs should be in the tests.  
 
@@ -44,9 +45,10 @@ biggest difference is that Cromlech uses Venutian Decorators rather than
 Grok's martian declarations.  Actually Martian is already in Python 3,
 so it should be reasonably easy to port it to Crom. 
 
-The third issues is that Crom uses zeam.form rather than zc.form and
-z3c.form.  Not that much difference there really, just fewer adaptors.
-Zeam.form has already been ported to the Crom Registry.
+The third issues is that Crom uses a fork of zeam.form, called dolmen.form
+The libraries are all very similar.
+Zeam has just fewer adaptors than zc.form and z3c.form. 
+Dolmen.form is a port of Zeam.form to the Crom Registry.
 
 What about Documentation?
 Historically
