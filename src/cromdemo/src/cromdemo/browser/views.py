@@ -6,10 +6,11 @@ from cromlech.browser.exceptions import HTTPFound
 from cromlech.security import Unauthorized
 from zope.interface import Interface
 
-from . import tal_template, ITab, Page
+from . import tal_template,  Page
+from ..interfaces import ITab
 from ..models import Root, Leaf
 from ..auth import logout
-
+from dolmen.container import IBTreeContainer
 
 @view_component
 @name('logout')
@@ -25,7 +26,7 @@ class Logout(Page):
 
 @view_component
 @name('index')
-@context(Root)
+@context(IBTreeContainer)
 class RootIndex(Page):
     template = tal_template('home.pt')
 

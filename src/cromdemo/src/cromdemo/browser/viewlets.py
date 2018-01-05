@@ -7,7 +7,8 @@ from cromlech.browser import IURL, slot
 from cromlech.browser.directives import title
 from cromlech.security import getSecurityGuards, permissions
 
-from . import tal_template, ITab
+from . import tal_template
+from ..interfaces import ITab
 from .layout import SiteHeader, AdminHeader, ContextualActions, Footer
 
 
@@ -18,9 +19,8 @@ class Footer(Viewlet):
     def render(self):
         return """
 <div class='container'>
-  <em>
-    <a href='https://github.com/pythonlinks/Demo#Introduction'>Learn  More
-</a>
+  <em>Read 
+    <a href='https://github.com/pythonlinks/Demo#introduction'>the Documentation</a>.
   </em>
 </div>"""
 

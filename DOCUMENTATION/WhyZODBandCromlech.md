@@ -44,3 +44,10 @@ I invite you to read [Cromlech Vs Django](./CromlechVsDjango.md)
 
 I invite you to read [Cromlech Vs Pyramid](./CromlechVsPyramid.md)
 
+
+I did a full API
+Cromlech has been used in multiple different applications. 
+/ ReactJS app
+a Solr + ArangoDB app for uploading files. 
+
+
