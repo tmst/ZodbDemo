@@ -9,7 +9,7 @@ from zope.interface import implementer
 import persistent
     
 @implementer(ILeaf)
-class Leaf(BTreeContainer):
+class Leaf(persistent.Persistent):
     def __init__(self, title, body):
         self.title = title
         self.body = body
