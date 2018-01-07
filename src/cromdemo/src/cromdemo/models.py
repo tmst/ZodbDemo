@@ -9,16 +9,17 @@ from zope.interface import implementer
 from persistent import Persistent
     
 @implementer(ILeaf)
-class Leaf(BTreeContainer):
+#class Leaf(BTreeContainer):
+class Leaf(Persistent):
     #IT COULD ALSO HAVE SUBCLASSED OFF OF CLASS PERSISTENT
     title="A leaf"
     body="A Beautiful leaf"
-
+    """
     def __init__(self, title, body):
         BTreeContainer.__init__(self)
         self.title = title
         self.body = body
-
+    """
 
 @implementer(IRoot)
 class Root(BTreeContainer):
