@@ -9,8 +9,9 @@ from cromlech.security import getSecurityGuards, permissions
 
 from . import tal_template
 from ..interfaces import ITab
-from .layout import SiteHeader, AdminHeader, ContextualActions, Footer
-
+from .layout import SiteHeader, AdminHeader, ContextualActions
+from .layout import Footer, Breadcrumbs
+from dolmen.breadcrumbs import defaultBreadcrumbs
 
 @viewlet
 @slot(Footer)
@@ -33,7 +34,15 @@ class Cromlech(Viewlet):
         baseurl = self.request.script_name
         if not baseurl.startswith('/'):
             baseurl = '/' + baseurl
-        return "<h1><a href='%s'>Cromlech</a></h1>" % baseurl
+        return  "<h1><a href='%s'>ZODB Demo</a></h1>" % baseurl
+
+
+@viewlet
+@slot(Breadcrumbs)
+class Breadcrumbs(Viewlet):
+    def render(self):
+        return defaultBreadcrumbs(self.context,self.request) 
+
 
 
 @viewlet

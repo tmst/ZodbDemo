@@ -15,6 +15,10 @@ from . import tal_template
 class SiteHeader(ViewletManager):
     pass
 
+@viewlet_manager
+class Breadcrumbs(ViewletManager):
+    pass
+
 
 @viewlet_manager
 @permissions('Manage')

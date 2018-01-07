@@ -7,9 +7,8 @@ from loader import PythonConfiguration
 
 def init_db(db):
     with PythonConfiguration('config.json') as config:
-       """We create two leaves here.. We get the DB connection object.
-       We need to open and to close it. It doesn't need to return anything.
-       Make sure to use a transaction manager to have it correctly persisted.
+       """
+       Initialize the ZODB if needed.
        """
        from cromdemo.models import Root, Leaf
        conn = db.open()
@@ -18,9 +17,12 @@ def init_db(db):
           appRoot=Root()
           root.applicationRoot=appRoot
           appRoot.__name__='root'
-          appRoot['green'] = Leaf(u'Green leaf', u'A summer leaf')
-          appRoot['yellow'] = Leaf(u'Yellow leaf', u'An automn leaf')
           import transaction
+          transaction.commit()           
+#          appRoot['yellow'] = Leaf()
+          appRoot['green'] = Leaf('Green leaf', 'A summer leaf')
+          appRoot['yellow'] = Leaf('Yellow leaf', 'An automn leaf')
+
           transaction.commit()           
 
 
