@@ -5,23 +5,24 @@ These are installation instructions assuming that you have a unix server.
 First fire up bash, then get a copy of the git repository.
 
 ```
-bash
+$>bash
 $> git clone https://github.com/PythonLinks/CromlechDemo
 ```
 
 Now we install a virtual env.
 
-For python3.3+
+If your server's main python in python3.3+
 
 ```
 $> pyvenv .
-
-#  OR WHAT I HAD TO DO ON LINUX WHERE THE DEFAULT PYTHON IS 2.something
-#  virtualenv -p /usr/bin/python3 .
-
 $> source bin/activate
 ```
 
+#  OR WHAT I HAD TO DO ON LINUX WHERE THE DEFAULT PYTHON IS 2.something
+```
+$>virtualenv -p /usr/bin/python3 .
+$> source bin/activate
+```
 
 When you first download this there is a file in the root called bootstrap.py.
 you run
@@ -61,5 +62,8 @@ And when you download a new versoin use the commands
 ```
 $>bin/develop update
 ```
+to update all the packages which have been downloaded.
 
-to update all the packages which have been downloaded. 
+And of coures in the unlikely event that  you install multiple times,
+then your browser gets a key, but the server key is different.
+So you get a jwt error. 
