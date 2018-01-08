@@ -5,23 +5,18 @@ from loader import PythonConfiguration
 
 
 
-def init_db(db):
-    with PythonConfiguration('config.json') as config:
-       """
-       Initialize the ZODB if needed.
-       """
-       from cromdemo.models import Root, Leaf
-       conn = db.open()
-       root = conn.root()
-       if not hasattr(root,'applicationRoot'):
-          appRoot=Root()
-          root.applicationRoot=appRoot
-          appRoot.__name__='root'
-          import transaction
-          appRoot['green'] = Leaf('Green leaf', 'A summer leaf')
-          appRoot['yellow'] = Leaf('Yellow leaf', 'An automn leaf')
+def populate_db(db, config):
+    import transaction
+    from cromlech.zodb import Connection
+    from cromdemo.models import Root, Leaf
 
-          transaction.commit()           
+    with Connection(db, transaction_manager=transaction.manager) as conn:
+        root = conn.root()
+        if not 'applicationRoot' in root:
+            appRoot = root['applicationRoot'] = Root()
+            appRoot['green'] = Leaf('Green leaf', 'A summer leaf')
+            appRoot['yellow'] = Leaf('Yellow leaf', 'An automn leaf')
+        transaction.manager.commit()
 
 
 with PythonConfiguration('config.json') as config:
@@ -35,10 +30,12 @@ with PythonConfiguration('config.json') as config:
     implicit.initialize()
 
     # We read the zodb conf and initialize it
-    from cromlech.zodb import init_db_from_file
+    from cromlech.zodb import init_db
     with open(config['zodb']['config'], 'r') as fd:
-        db = init_db_from_file(fd, init_db)
-        
+        zodb_config = fd.read()
+    db = init_db(zodb_config)
+    populate_db(db, config)
+
     # Getting the crypto key and creating the JWT service
     from cromlech.sessions.jwt import key_from_file
     from cromlech.sessions.jwt import JWTCookieSession 
@@ -66,7 +63,7 @@ with PythonConfiguration('config.json') as config:
     
     from cromlech.zodb.middleware import ZODBApp
     from cromdemo.app import demo_application
-    zodb_app =ZODBApp(demo_application, db, key="zodb.connection")
+    zodb_app = ZODBApp(demo_application, db, key="zodb.connection")
     application =session_wrapper(zodb_app)
 
 
