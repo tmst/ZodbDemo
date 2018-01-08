@@ -1,0 +1,8 @@
+<zodb demo>
+  <blobstorage>
+    blob-dir ${zodb_conf:blobdir}/Blobs
+    <filestorage>
+      path ${zodb_conf:datadir}/Data.fs
+    </filestorage>
+  </blobstorage>
+</zodb>
