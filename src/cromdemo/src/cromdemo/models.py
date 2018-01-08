@@ -2,17 +2,17 @@
 
 # Subject to ZPL and CV License agreements
 
-import persistent
 
-from dolmen.container import BTreeContainer
+from dolmen.container import BTreeContainer, Contained
 from zope.interface import implementer
 from .interfaces import ILeaf, IRoot
 
 
 @implementer(ILeaf)
-class Leaf(persistent.Persistent):
+class Leaf(Contained):
 
     def __init__(self, title, body):
+        Contained.__init__(self)
         self.title = title
         self.body = body
 
