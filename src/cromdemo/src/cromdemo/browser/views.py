@@ -5,14 +5,15 @@ from dolmen.view import name, context, view_component
 from cromlech.browser.exceptions import HTTPFound
 from cromlech.security import Unauthorized
 from zope.interface import Interface
-from cromlech.browser.interfaces import IPublicationRoot
+from cromlech.browser.interfaces import IURL, IPublicationRoot
 
 from . import tal_template,  Page
 from ..interfaces import ITab, ILeaf
 from ..models import Root, Leaf
 from ..auth import logout
 from dolmen.container import IBTreeContainer
-from dolmen.breadcrumbs import defaultBreadcrumbs
+from dolmen.breadcrumbs import BreadcrumbsRenderer
+
 
 @view_component
 @name('logout')
@@ -25,25 +26,27 @@ class Logout(Page):
     def render(self):
         raise HTTPFound(location='/')
 
-from dolmen.location import resolve_url
 
 class BreadcrumbsPage(Page):
     
     def breadcrumbs(self):
-        return defaultBreadcrumbs(self.context,self.request)
+        renderer = BreadcrumbsRenderer()
+        renderer.update()
+        return renderer.render()
+
     def url2(self,item):
         self.url(item);
         return 'DONE'
-    
+
     def url(self,item):
         if IPublicationRoot.providedBy(item):
            return self.request.application_url
         container = item.__parent__
-
         result = self.url(container)+ '/' + item.__name__
         print (result)
         return result
-    
+
+
 @view_component
 @name('index')
 @context(IBTreeContainer)
