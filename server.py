@@ -18,7 +18,6 @@ def init_db(db):
           root.applicationRoot=appRoot
           appRoot.__name__='root'
           import transaction
-#          appRoot['yellow'] = Leaf()
           appRoot['green'] = Leaf('Green leaf', 'A summer leaf')
           appRoot['yellow'] = Leaf('Yellow leaf', 'An automn leaf')
 

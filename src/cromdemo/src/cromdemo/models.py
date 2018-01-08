@@ -9,16 +9,9 @@ from persistent import Persistent
 from dolmen.container import BTreeContainer
     
 @implementer(ILeaf)
-class Leaf(BTreeContainer):
-#IT COULD ALSO HAVE SUBCLASSED OFF OF CLASS PERSISTENT
-#BUT FOR SOME READON THAT IS NOT WORKING
-#class Leaf(Persistent):
-
-    title="A leaf"
-    body="A Beautiful leaf"
+class Leaf(Persistent):
     def __init__(self, title, body):
-        #Persistent.__init__(self)
-        BTreeContainer.__init__(self)
+        Persistent.__init__(self)
         self.title = title
         self.body = body
 
