@@ -8,7 +8,7 @@ from cromlech.browser.directives import title
 from cromlech.security import getSecurityGuards, permissions
 
 from . import tal_template
-from ..interfaces import ITab
+from ..interfaces import ITab, ILeaf
 from .layout import SiteHeader, AdminHeader, ContextualActions
 from .layout import Footer, Breadcrumbs
 from dolmen.breadcrumbs import defaultBreadcrumbs
@@ -70,7 +70,7 @@ def sort_key(component):
     explicit = order.get_policy(component[1], order.dotted_name, 0)
     return (explicit, component[1].__module__, component[1].__class__.__name__)
 
-
+from cromdemo.models import Leaf
 @viewlet
 @slot(ContextualActions)
 class Tabs(Viewlet):
@@ -79,6 +79,14 @@ class Tabs(Viewlet):
     def tabs(self):
         url = IURL(self.context, self.request)
         for id, view in self._tabs:    
+            #Basically if the views are for Ileaves
+            #And the context is ILeaf,
+            #or vice versa display them. 
+            #Really this should be
+            #if getattr(view,'cromlech.context').providedBy(self.context)
+            if not (( getattr(view,'cromlech.context')==ILeaf) ==
+                    (ILeaf.providedBy(self.context))):
+                continue
             yield {
                 'active': self.view.__class__ is view,
                 'title': title.get(view) or id,

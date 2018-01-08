@@ -8,7 +8,7 @@ from zope.interface import Interface
 from cromlech.browser.interfaces import IPublicationRoot
 
 from . import tal_template,  Page
-from ..interfaces import ITab
+from ..interfaces import ITab, ILeaf
 from ..models import Root, Leaf
 from ..auth import logout
 from dolmen.container import IBTreeContainer
@@ -54,7 +54,7 @@ class RootIndex(BreadcrumbsPage):
 @view_component
 @name('index')
 @target(ITab)
-@context(Leaf)
+@context(ILeaf)
 @order(10)
 class LeafIndex(BreadcrumbsPage):
     template = tal_template('leaf.pt')
