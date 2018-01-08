@@ -11,20 +11,12 @@ $> git clone https://github.com/PythonLinks/CromlechDemo
 
 Now we install a virtual env.
 
-For python2.7+
-
-```
-$> virtualenv .
-$> source bin/activate
-
-```
-
 For python3.3+
 
 ```
 $> pyvenv .
 
-#  OR WHAT I HAD TO DO ON LINUX FOR PYTHON 3
+#  OR WHAT I HAD TO DO ON LINUX WHERE THE DEFAULT PYTHON IS 2.something
 #  virtualenv -p /usr/bin/python3 .
 
 $> source bin/activate
@@ -48,10 +40,11 @@ all the files and directories needed to run the application.
 In particular it creates config.json, which includes all the Python Path
 information.
 
+$>pip install uwsgi
 
 And now we run the application.
 ```
-$> uwsgi --http :8080 --wsgi-file app.py
+$> uwsgi --http :8080 --wsgi-file server.py
 ```
 To debug the uwsgi easily, just use : --honour-stdin, in the
 command line when launching it.
