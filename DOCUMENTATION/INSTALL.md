@@ -1,7 +1,18 @@
 Installation instructions with Explanation
 ========================
 
-These are installation instructions assuming that you have a unix server.
+These are installation instructions assuming that you have a debian server.
+First the commands, then explanations.
+
+$>bash
+$>git clone https://github.com/PythonLinks/Demo
+$>cd Demo
+$>virtualenv -p /usr/bin/python3 .
+$>source bin/activate
+$>python bootstrap.py
+$>bin/buildout
+$>uwsgi --http :8081 -p1 --honour-stdin --wsgi-file server.py
+
 First fire up bash, then get a copy of the git repository.
 
 ```
