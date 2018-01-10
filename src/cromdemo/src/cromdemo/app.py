@@ -94,7 +94,7 @@ def publish(environ, start_response, principal):
             # traverse and publish our objects.
             conn = environ["zodb.connection"]
             root=conn.root()
-            root=root.applicationRoot
+            root=root["applicationRoot"]
             return publisher(request, root)
 
 

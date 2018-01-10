@@ -16,7 +16,7 @@ def populate_db(db, config):
             appRoot = root['applicationRoot'] = Root()
             appRoot['green'] = Leaf('Green leaf', 'A summer leaf')
             appRoot['yellow'] = Leaf('Yellow leaf', 'An automn leaf')
-        transaction.manager.commit()
+            transaction.manager.commit()
 
 
 with PythonConfiguration('config.json') as config:

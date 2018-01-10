@@ -11,7 +11,7 @@ from . import tal_template
 from ..interfaces import ITab, ILeaf
 from .layout import SiteHeader, AdminHeader, ContextualActions
 from .layout import Footer, Breadcrumbs
-from dolmen.breadcrumbs import defaultBreadcrumbs
+from dolmen.breadcrumbs import BreadcrumbsRenderer
 
 @viewlet
 @slot(Footer)
@@ -41,7 +41,9 @@ class Cromlech(Viewlet):
 @slot(Breadcrumbs)
 class Breadcrumbs(Viewlet):
     def render(self):
-        return defaultBreadcrumbs(self.context,self.request) 
+        crumbs = BreadcrumbsRenderer(self.context,self.request)
+        crumbs.update()
+        return crumbs.render()
 
 
 
