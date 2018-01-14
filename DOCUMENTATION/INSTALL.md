@@ -2,6 +2,8 @@ Installation instructions with Explanation
 ========================
 
 These are installation instructions assuming that you have a debian server.
+Python 3 please.
+
 First the commands, then explanations.
 
 $>bash
@@ -12,6 +14,11 @@ $>source bin/activate
 $>python bootstrap.py
 $>bin/buildout
 $>uwsgi --http :8081 -p1 --honour-stdin --wsgi-file server.py
+
+
+Here is how to install venv.
+curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+
 
 First fire up bash, then get a copy of the git repository.
 
