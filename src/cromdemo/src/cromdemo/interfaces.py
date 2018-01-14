@@ -7,7 +7,7 @@ from zope.interface import implementer, Interface
 from dolmen.container import BTreeContainer,IBTreeContainer
 from cromlech.browser import IView
 from zope.schema import Text, TextLine, Password
-from zopache.crud import ILeaf, IContainer
+from zopache.crud.interfaces import ILeaf, IContainer
 
 class ITab(IView):
     pass

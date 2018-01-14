@@ -12,16 +12,17 @@ from dolmen.forms.base import Fields, FAILURE
 from dolmen.forms.base import action, name, context, form_component
 from dolmen.forms.base import apply_data_event
 from dolmen.forms.base.errors import Error
-from zopache.crud import AddForm
+from zopache.crud.components import AddForm
 
 
-from . import  Form
+from zopache.basics.forms  import  Form
 from ..interfaces import ITab
 
 from ..auth import Auth
 from ..interfaces import  ITreeLeaf, ITreeBranch, ILogin
 from ..models import  TreeLeaf, TreeBranch
 from dolmen.container import IBTreeContainer, BTreeContainer
+from dolmen.template import TALTemplate
 
 @form_component
 @name('addLeaf')

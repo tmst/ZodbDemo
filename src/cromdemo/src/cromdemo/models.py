@@ -7,13 +7,13 @@ from dolmen.container import BTreeContainer
 from persistent import Persistent
 from zope.interface import implementer
 from .interfaces import ITreeLeaf
-from zopache import crud
-        
-@implementer(crud.IRootContainer)
+from zopache.crud.interfaces import IRootContainer, IContainer, ILeaf
+
+@implementer(IRootContainer)
 class TreeRoot(BTreeContainer):
     title = "Application  Root"
 
-@implementer(crud.IContainer)
+@implementer(IContainer)
 class TreeBranch(BTreeContainer):
     title = "A Branch on the Tree"
 
