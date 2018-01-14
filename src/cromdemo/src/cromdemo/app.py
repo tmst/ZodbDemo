@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#This software is subject to the CV and Zope Public Licenses.
 
 from cromlech.browser.interfaces import IView
 from cromlech.dawnlight import DawnlightPublisher
@@ -11,20 +12,9 @@ from cromlech.security import unauthenticated_principal as anonymous
 from cromlech.webob.request import Request
 from cromlech.browser import setSession
 
-from .models import Leaf, Root
 from .auth import Auth, secured
 from .security import secure_query_view
 
-
-# Root serves as a publication root, for the authenticated users.
-# It behaves like a dict, but it will locate objects upon retrieval
-# using the `__getitem__` method.
-"""
-root = Root({
-    'green': Leaf('Green leaf', 'A summer leaf'),
-    'yellow': Leaf('Yellow leaf', 'An automn leaf'),
-})
-"""
 
 
 # Auth serves as a context for the `Login` form.

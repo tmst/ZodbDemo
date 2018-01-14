@@ -8,14 +8,14 @@ from loader import PythonConfiguration
 def populate_db(db, config):
     import transaction
     from cromlech.zodb import Connection
-    from cromdemo.models import Root, Leaf
+    from cromdemo.models import TreeRoot, TreeLeaf, TreeBranch
 
     with Connection(db, transaction_manager=transaction.manager) as conn:
         root = conn.root()
         if not 'applicationRoot' in root:
-            appRoot = root['applicationRoot'] = Root()
-            appRoot['green'] = Leaf('Green leaf', 'A summer leaf')
-            appRoot['yellow'] = Leaf('Yellow leaf', 'An automn leaf')
+            appRoot = root['applicationRoot'] = TreeRoot()
+            appRoot['green'] = TreeLeaf(title='Green leaf', body='A summer leaf')
+            appRoot['yellow'] = TreeLeaf(title='Yellow leaf', body='An automn leaf')
             transaction.manager.commit()
 
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#This software is subject to the CV and Zope Public Licenses.
 
 from crom import order
 from crom.utils import sort_components
@@ -8,10 +9,11 @@ from cromlech.browser.directives import title
 from cromlech.security import getSecurityGuards, permissions
 
 from . import tal_template
-from ..interfaces import ITab, ILeaf
+from ..interfaces import ITab, ITreeLeaf
 from .layout import SiteHeader, AdminHeader, ContextualActions
 from .layout import Footer, Breadcrumbs
 from dolmen.breadcrumbs import BreadcrumbsRenderer
+from cromlech.browser import IView
 
 @viewlet
 @slot(Footer)
@@ -45,8 +47,6 @@ class Breadcrumbs(Viewlet):
         crumbs.update()
         return crumbs.render()
 
-
-
 @viewlet
 @slot(SiteHeader)
 @permissions('View')
@@ -72,7 +72,7 @@ def sort_key(component):
     explicit = order.get_policy(component[1], order.dotted_name, 0)
     return (explicit, component[1].__module__, component[1].__class__.__name__)
 
-from cromdemo.models import Leaf
+from cromdemo.models import TreeLeaf
 @viewlet
 @slot(ContextualActions)
 class Tabs(Viewlet):
@@ -80,18 +80,18 @@ class Tabs(Viewlet):
 
     def tabs(self):
         url = IURL(self.context, self.request)
-        for id, view in self._tabs:    
-            #Basically if the views are for Ileaves
-            #And the context is ILeaf,
-            #or vice versa display them. 
-            #Really this should be
-            #if getattr(view,'cromlech.context').providedBy(self.context)
-            if not (( getattr(view,'cromlech.context')==ILeaf) ==
-                    (ILeaf.providedBy(self.context))):
-                continue
+        view=self.view 
+        views=IView.all_components(view.context, view.request)
+        for item  in views:
+            id=item[0]
+            aClass=item[1]
+            #THE Logout View is not part of crud. 
+            if id=="logout":
+               continue
+           
             yield {
-                'active': self.view.__class__ is view,
-                'title': title.get(view) or id,
+                'active': self.view.__class__ is aClass,
+                'title': title.get(aClass) or id,
                 'url': '%s/%s' % (url, id),
             }
 

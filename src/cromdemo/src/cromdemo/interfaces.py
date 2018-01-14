@@ -1,19 +1,17 @@
+# -*- coding: utf-8 -*-
+
+#This software is subject to the CV and Zope Public Licenses.
+
 from cromlech.browser.interfaces import IPublicationRoot
 from zope.interface import implementer, Interface
 from dolmen.container import BTreeContainer,IBTreeContainer
 from cromlech.browser import IView
 from zope.schema import Text, TextLine, Password
+from zopache.crud import ILeaf, IContainer
 
 class ITab(IView):
     pass
 
-class IRoot(IPublicationRoot, IBTreeContainer):
-      pass
-
-class IName (Interface):
-    name = TextLine(
-        title='Object Id', required=True)
-    
 class ILogin(Interface):
 
     username = TextLine(
@@ -23,11 +21,22 @@ class ILogin(Interface):
         title='Password', required=True)
 
 
-class ILeaf(Interface):
+class ITreeLeaf(ILeaf):
 
     title = TextLine(
         title='Title', required=True)
 
     body = Text(
         title='Body', required=True)
+
+#The difference is that Tree Branches subclass
+#off of containers, so you can add stuff to them. 
+class ITreeBranch(IContainer):
+
+    title = TextLine(
+        title='Title', required=True)
+
+    body = Text(
+        title='Body', required=True)    
+
 

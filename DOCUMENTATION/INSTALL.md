@@ -13,7 +13,7 @@ $>virtualenv -p /usr/bin/python3 .
 $>source bin/activate
 $>python bootstrap.py
 $>bin/buildout
-$>uwsgi --http :8081 -p1 --honour-stdin --wsgi-file server.py
+$>uwsgi --http :8081 -p1 --honour-stdin --static-map2 /favicon.ico=./favicon.ico --wsgi-file server.py
 
 
 Here is how to install venv.
@@ -63,16 +63,22 @@ $>pip install uwsgi
 
 And now we run the application.
 ```
-$> uwsgi --http :8080 --wsgi-file server.py
+$> uwsgi --http :8080 --static-map2 /favicon.ico=./favicon.ico --wsgi-file server.py
 ```
-To debug the uwsgi easily, just use : --honour-stdin, in the
-command line when launching it.
+
+--honour-stdin
+Allows you to  run a debugger on  the uwsgi.
 it will allow you to use PDB without problems.
-You can also reduce the number of workers to 1.
-Use the option -p 1
+
+-p 1
+Sets the number of processes.
+
+--static-map2 /favicon.ico=./favicon.ico
+Serves the favicon.ico.  The problem is without this
+you will see more error messages which interfere with development.
 
 Here is the command I use. 
- uwsgi --http :8081  -p1  --honour-stdin --wsgi-file server.py
+ uwsgi --http :8081  -p1  --static-map2 /favicon.ico=./favicon.ico --honour-stdin --wsgi-file server.py
 
 Note that port 8081 works for me, you may want a different port number.
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#This software is subject to the CV and Zope Public Licenses.
 
 from crom import subscription, sources, target
 from cromlech.browser.interfaces import IView

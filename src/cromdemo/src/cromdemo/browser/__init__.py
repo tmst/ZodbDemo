@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#This software is subject to the CV and Zope Public Licenses.
 
 from os import path
 

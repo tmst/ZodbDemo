@@ -1,7 +1,7 @@
 This software is subject to the Zope Public License with the following
 additional conditions.
 
-1. Give credit to both Zope and Cromlech.
+1. Give credit to Zope, Cromlech and Zopache
 
 2. If you are developing with this software, then send a copy of your Curriculum
 Vitae to Christopher Lozinski lozinski@PythonLinks.info,
