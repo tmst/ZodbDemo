@@ -15,7 +15,7 @@ from dolmen.forms.base.errors import Error
 from zopache.crud.components import AddForm
 
 
-from zopache.basics.forms  import  Form
+from zopache.core.forms  import  Form
 from ..interfaces import ITab
 
 from ..auth import Auth

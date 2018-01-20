@@ -2,7 +2,7 @@ Installation instructions with Explanation
 ========================
 
 These are installation instructions assuming that you have a debian server.
-Python 3 please.
+Python 3.4+ required.
 
 First the commands, then explanations.
 
@@ -13,11 +13,17 @@ $>virtualenv -p /usr/bin/python3 .
 $>source bin/activate
 $>python bootstrap.py
 $>bin/buildout
+$>pip install uwsgi
 $>uwsgi --http :8081 -p1 --honour-stdin --static-map2 /favicon.ico=./favicon.ico --wsgi-file server.py
 
+If you do not have Python3.4 installed, probably best to use pyenv to install it.
 
 Here is how to install venv.
-curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+$>curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+$>pyenv install 3.4.2
+
+Read more at
+https://docs.python.org/3/library/venv.html
 
 
 First fire up bash, then get a copy of the git repository.

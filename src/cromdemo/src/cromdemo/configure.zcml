@@ -12,5 +12,6 @@
   <grok:grok package="dolmen.forms.base" />
   <grok:grok package="dolmen.forms.ztk" />
     <grok:grok package="zopache.crud" />
+        <grok:grok package="zopache.core" />
 
 </configure>

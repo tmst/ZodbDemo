@@ -15,7 +15,7 @@ from zopache.crud import IRootContainer
 from ..interfaces import ITab, ITreeLeaf
 
 
-from zopache.basics.page  import  Page
+from zopache.core.page  import  Page
 from ..models import TreeRoot, TreeLeaf
 from ..auth import logout
 from dolmen.breadcrumbs import BreadcrumbsRenderer

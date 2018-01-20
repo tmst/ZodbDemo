@@ -10,8 +10,8 @@ from cromlech.security import getSecurityGuards, permissions
 
 from . import tal_template
 from ..interfaces import ITab, ITreeLeaf
-from .layout import SiteHeader, AdminHeader, ContextualActions
-from .layout import Footer, Breadcrumbs
+from zopache.core.layout import SiteHeader, AdminHeader, ContextualActions
+from zopache.core.layout import Footer, Breadcrumbs
 from dolmen.breadcrumbs import BreadcrumbsRenderer
 from cromlech.browser import IView
 
