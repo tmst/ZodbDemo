@@ -7,6 +7,7 @@ from dolmen.viewlet import viewlet, Viewlet
 from cromlech.browser import IURL, slot
 from cromlech.browser.directives import title
 from cromlech.security import getSecurityGuards, permissions
+from zope.interface import implementedBy
 
 from . import tal_template
 from ..interfaces import ITab, ITreeLeaf
@@ -14,6 +15,8 @@ from zopache.core.layout import SiteHeader, AdminHeader, ContextualActions
 from zopache.core.layout import Footer, Breadcrumbs
 from dolmen.breadcrumbs import BreadcrumbsRenderer
 from cromlech.browser import IView
+from zopache.ttw.interfaces import IWeb
+from zopache.crud.interfaces import IApp
 
 @viewlet
 @slot(Footer)
@@ -88,7 +91,12 @@ class Tabs(Viewlet):
             #THE Logout View is not part of crud. 
             if id=="logout":
                continue
-           
+            if IApp.implementedBy(aClass):
+                   continue               
+
+            if IWeb.implementedBy(aClass):
+                   continue
+
             yield {
                 'active': self.view.__class__ is aClass,
                 'title': title.get(aClass) or id,

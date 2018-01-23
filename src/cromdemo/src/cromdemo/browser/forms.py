@@ -13,6 +13,7 @@ from dolmen.forms.base import action, name, context, form_component
 from dolmen.forms.base import apply_data_event
 from dolmen.forms.base.errors import Error
 from zopache.crud.components import AddForm
+from zope.interface import implementer
 
 
 from zopache.core.forms  import  Form
@@ -23,14 +24,16 @@ from ..interfaces import  ITreeLeaf, ITreeBranch, ILogin
 from ..models import  TreeLeaf, TreeBranch
 from dolmen.container import IBTreeContainer, BTreeContainer
 from dolmen.template import TALTemplate
+from zopache.crud.interfaces import IApp
 
 @form_component
 @name('addLeaf')
 @context(IBTreeContainer)
 @target(ITab)
-@title("Add a leaf")
+@title("Tree Leaf")
 @permissions('Manage')
 class AddLeaf(AddForm):
+    implements = IApp
     interface = ITreeLeaf
     ignoreContent = True
     factory=TreeLeaf
@@ -39,9 +42,10 @@ class AddLeaf(AddForm):
 @name('addBranch')
 @context(IBTreeContainer)
 @target(ITab)
-@title("Add a Branch")
+@title("Tree Branch")
 @permissions('Manage')
 class AddBranch(AddForm):
+    implements = IApp
     interface = ITreeBranch
     ignoreContent = True
     factory=TreeBranch   

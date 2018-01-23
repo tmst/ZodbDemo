@@ -1,4 +1,37 @@
-<ul class="nav nav-tabs">
+<nav class="navbar navbar-inverse">
+<div class="container-fluid">
+<div class="navbar-header">
+<a class="navbar-brand" href="#">WebSiteName</a>
+</div>
+<ul class="nav navbar-nav">
+
+
+<li class="dropdown" tal:condition="hasattr(view,'isBTreeContainer') 
+and view.isBTreeContainer()">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+Add  <span class="caret"></span></a>
+
+<ul class="dropdown-menu">
+
+
+<li><a href="./addCSS">CSS</a></li>
+<li><a href="./addContainer">Container</a></li>
+<li><a href="./addHTML">HTML</a></li>
+
+<li><a href="./addJavascript">Javascript</a></li>
+<li><a href="./addJavascriptFolder">Javascript Folder</a></li>
+</ul>
+</li>
+
+
+
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+CRUD  <span class="caret"></span></a>
+
+<ul class="dropdown-menu">
+
+
   <tal:tabs repeat="tab component.tabs()">
     <li tal:attributes="class tab['active'] and 'active' or ''">
       <a href="#"
@@ -6,4 +39,15 @@
 	 tal:content="tab['title']" />
     </li>
   </tal:tabs>
+
+
 </ul>
+</li>
+
+
+
+</ul>
+</div>
+</nav>
+
+
