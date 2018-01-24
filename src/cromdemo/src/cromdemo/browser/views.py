@@ -12,7 +12,7 @@ from zope.interface import Interface
 from dolmen.container import IBTreeContainer
 from cromlech.browser.interfaces import IURL, IPublicationRoot
 from zopache.crud import IRootContainer
-from ..interfaces import ITab, ITreeLeaf
+from cromdemo.interfaces import ITab, ITreeLeaf
 
 
 from zopache.core.page  import  Page

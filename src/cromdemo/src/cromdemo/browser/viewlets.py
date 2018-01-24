@@ -17,6 +17,7 @@ from dolmen.breadcrumbs import BreadcrumbsRenderer
 from cromlech.browser import IView
 from zopache.ttw.interfaces import IWeb
 from zopache.crud.interfaces import IApp
+from zopache.ttw.interfaces import IHistoricDetails
 
 @viewlet
 @slot(Footer)
@@ -91,11 +92,18 @@ class Tabs(Viewlet):
             #THE Logout View is not part of crud. 
             if id=="logout":
                continue
-            if IApp.implementedBy(aClass):
-                   continue               
 
+            #Dont show add custom user's classes
+            if IApp.implementedBy(aClass):
+                   continue
+               
+            # Don't show add HTML CSS Javascript Image
             if IWeb.implementedBy(aClass):
                    continue
+
+            #These are only accessed from History Page   
+            if IHistoricDetails.implementedBy(aClass):
+                   continue               
 
             yield {
                 'active': self.view.__class__ is aClass,
