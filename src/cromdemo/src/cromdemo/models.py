@@ -8,25 +8,25 @@ from zope.interface import implementer
 from .interfaces import ITreeLeaf
 from zopache.crud.interfaces import IRootContainer, IContainer, ILeaf
 from zopache.core import Leaf
+from zopache.ttw.html import HTML, HTMLContainer
 
-@implementer(IRootContainer)
-class TreeRoot(BTreeContainer):
-    title = "Application  Root"
 
 @implementer(IContainer)
-class TreeBranch(BTreeContainer):
+class TreeBranch(HTMLContainer):
+    def __init__(self):
+        BTreeContainer.__init__(self)
+        
     title = "A Branch on the Tree"
-
+    source=u''
+    
+@implementer(IRootContainer)
+class TreeRoot(TreeBranch):
+    title = "Application  Root"
 
 
 from zopache.core import Leaf    
 #The ITreeLeaf gives the object  attributes
 @implementer(ITreeLeaf) 
 class TreeLeaf(Leaf):
-
-    def __init__(self, **kwargs):
-        Persistent.__init__(self)
-        Contained.__init__(self)
-        for key, value in kwargs.items():
-            setattr(self,key,value)
+      pass
        

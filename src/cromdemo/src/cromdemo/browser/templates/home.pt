@@ -3,7 +3,7 @@
   <ul>
 <li tal:repeat="name context.keys()">
 
-      <a href="${view.url(context[name])}" >   ${name}</a>
+      <a href="${view.url(context[name])+'/manage'}" >   ${name}</a>
     </li>
   </ul>
 </div>

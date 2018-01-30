@@ -34,12 +34,9 @@ class Logout(Page):
         raise HTTPFound(location='/')
 
 
-
-
-
 @view_component
 @name('index')
-@title("View")
+@title("Manage")
 @target(ITab)
 @context(IBTreeContainer)
 class RootIndex(Page):

@@ -15,9 +15,11 @@ from zopache.core.layout import SiteHeader, AdminHeader, ContextualActions
 from zopache.core.layout import Footer, Breadcrumbs
 from dolmen.breadcrumbs import BreadcrumbsRenderer
 from cromlech.browser import IView
-from zopache.ttw.interfaces import IWeb
+from zopache.crud.interfaces import IWeb
 from zopache.crud.interfaces import IApp
 from zopache.ttw.interfaces import IHistoricDetails
+import operator
+from zopache.ttw.interfaces import IHTML
 
 @viewlet
 @slot(Footer)
@@ -86,6 +88,7 @@ class Tabs(Viewlet):
         url = IURL(self.context, self.request)
         view=self.view 
         views=IView.all_components(view.context, view.request)
+        result = []
         for item  in views:
             id=item[0]
             aClass=item[1]
@@ -103,13 +106,18 @@ class Tabs(Viewlet):
 
             #These are only accessed from History Page   
             if IHistoricDetails.implementedBy(aClass):
-                   continue               
+                   continue
+               
+            if ((id =='edit') and IHTML.providedBy( view.context)): 
+               continue
 
-            yield {
+            result.append( {
                 'active': self.view.__class__ is aClass,
                 'title': title.get(aClass) or id,
                 'url': '%s/%s' % (url, id),
-            }
+            })
+        result.sort(key=operator.itemgetter('title'))
+        return result        
 
     def update(self):
         tabs = ITab.all_components(self.context, self.request)

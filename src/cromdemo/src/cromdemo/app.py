@@ -2,7 +2,7 @@
 #This software is subject to the CV and Zope Public Licenses.
 
 from cromlech.browser.interfaces import IView
-from cromlech.dawnlight import DawnlightPublisher
+from zopache.core.publisher  import Publisher
 from cromlech.dawnlight import ViewLookup, view_locator
 from cromlech.i18n import EnvironLocale
 from cromlech.security import ContextualInteraction
@@ -33,8 +33,8 @@ auth = Auth({
 # Here, we provide a custom way to retrieve views, using a security-aware
 # function.
 # See `dawnlight` and `cromlech.dawnlight` for more information.
-publisher = DawnlightPublisher(
-    view_lookup=ViewLookup(view_locator(secure_query_view)),
+publisher = Publisher(
+    view_locator(secure_query_view)
 ).publish
 
 
@@ -52,7 +52,6 @@ class Session(object):
         # Exiting the block, we don't want the session set.
         self.session = None  # Remove the reference.
         setSession()
-
 
 @secured
 def publish(environ, start_response, principal):
@@ -76,6 +75,7 @@ def publish(environ, start_response, principal):
             # We do not want anonymous users.
             # But we could continue and rely on the security checks to raise
             # security errors and redirect on the login form.
+
             login = IView.adapt(auth, request, name='login')
             login.update()
             return login()

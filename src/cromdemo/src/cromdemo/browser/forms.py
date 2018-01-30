@@ -30,7 +30,7 @@ from zopache.crud.interfaces import IApp
 @name('addLeaf')
 @context(IBTreeContainer)
 @target(ITab)
-@title("Tree Leaf")
+@title("Add Tree Leaf")
 @permissions('Manage')
 class AddLeaf(AddForm):
     implements = IApp
@@ -42,7 +42,7 @@ class AddLeaf(AddForm):
 @name('addBranch')
 @context(IBTreeContainer)
 @target(ITab)
-@title("Tree Branch")
+@title("Add Tree Branch")
 @permissions('Manage')
 class AddBranch(AddForm):
     implements = IApp

@@ -8,6 +8,7 @@ from dolmen.container import BTreeContainer,IBTreeContainer
 from cromlech.browser import IView
 from zope.schema import Text, TextLine, Password
 from zopache.crud.interfaces import ILeaf, IContainer
+from zopache.core.interfaces import ISource
 
 class ITab(IView):
     pass
@@ -23,7 +24,7 @@ class ILogin(Interface):
 
 
     
-class ITreeLeaf(ILeaf):
+class ITreeLeaf(ILeaf,ISource):
 
     title = TextLine(
         title='Title', required=True)
