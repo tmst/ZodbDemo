@@ -39,7 +39,7 @@ class Logout(Page):
 @title("Manage")
 @target(ITab)
 @context(IBTreeContainer)
-class RootIndex(Page):
+class ContainerIndex(Page):
     template = tal_template('home.pt')
 
     

@@ -1,10 +1,9 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:grok="http://namespaces.zope.org/grok">
+   <include package="cromlech.grok" file="meta.zcml" />
 
-  <include package="cromlech.grok" file="meta.zcml" />
-
-  <grok:grok package="." />
+<grok:grok package="." />
   <grok:grok package="cromlech.i18n" />
   <grok:grok package="cromlech.location" />
   <grok:grok package="cromlech.dawnlight" />
@@ -14,6 +13,7 @@
   <grok:grok package="zopache.core" />
   <grok:grok package="zopache.crud" />
     <grok:grok package="zopache.ttw" />
+    <grok:grok package="zopache.zmi" />
 
 
 </configure>

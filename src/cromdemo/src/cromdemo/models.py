@@ -23,6 +23,11 @@ class TreeBranch(HTMLContainer):
 class TreeRoot(TreeBranch):
     title = "Application  Root"
 
+    def __init__(self):
+       BTreeContainer.__init__(self)        
+       #Needed For Cut Copy Paste
+       self.pasteFolder=TreeBranch()
+
 
 from zopache.core import Leaf    
 #The ITreeLeaf gives the object  attributes
