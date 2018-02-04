@@ -19,19 +19,15 @@ from zopache.crud.interfaces import IWeb
 from zopache.crud.interfaces import IApp
 from zopache.ttw.interfaces import IHistoricDetails
 import operator
-from zopache.ttw.interfaces import IHTML
+from zopache.ttw.interfaces import IHTML, IHTMLClass
 
+from ..content import footerSource
 @viewlet
 @slot(Footer)
 class Footer(Viewlet):
 
     def render(self):
-        return """
-<div class='container'>
-  <em>Read 
-    <a href='https://github.com/pythonlinks/Demo#introduction'>the Documentation</a>.
-  </em>
-</div>"""
+        return footerSource
 
 
 @viewlet
@@ -85,10 +81,21 @@ class Tabs(Viewlet):
     template = tal_template('tabs.pt')
 
     def tabs(self):
-        url = IURL(self.context, self.request)
+        context=self.context
+        url = IURL(context, self.request)
         view=self.view 
         views=IView.all_components(view.context, view.request)
         result = []
+
+        #THE VIEW LOOKUP INDEX ON ORDINARY OBJECTS
+        if (IHTML.providedBy(context) and not
+            IHTMLClass.providedBy(context)):
+            result.append( {
+                'active': False,
+                'title': 'View',
+                'url': url,
+            })
+        
         for item  in views:
             id=item[0]
             aClass=item[1]

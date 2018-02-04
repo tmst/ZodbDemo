@@ -17,9 +17,12 @@ Add  <span class="caret"></span></a>
 <li><a href="./addCSS">CSS</a></li>
 <li><a href="./addContainer">Container</a></li>
 <li><a href="./addHTML">HTML</a></li>
+<li><a href="./addCkHTML">CkHTML</a></li>
 
 <li><a href="./addJavascript">Javascript</a></li>
 <li><a href="./addJavascriptFolder">Javascript Folder</a></li>
+<li><a href="./addPython">Python</a></li>
+
 </ul>
 </li>
 

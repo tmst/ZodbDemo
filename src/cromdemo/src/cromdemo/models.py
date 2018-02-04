@@ -27,7 +27,7 @@ class TreeRoot(TreeBranch):
        BTreeContainer.__init__(self)        
        #Needed For Cut Copy Paste
        self.pasteFolder=TreeBranch()
-
+       self.__name__='root'
 
 from zopache.core import Leaf    
 #The ITreeLeaf gives the object  attributes

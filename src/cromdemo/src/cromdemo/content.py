@@ -1,19 +1,22 @@
 
-appRootSource="""<h2>Welcome to the ZODB Demo.&nbsp;</h2><p>&nbsp;</p><p>
-    ZODB is an Object Oriented database written in Python.&nbsp; 
-    Just subclass off of class Persistent, and your appliocation becomes persistent.</p><p>This 
-    demo showcases what is possible with the ZODB. &nbsp;In your browser,&nbsp; you can build a 
-    sophisticated</p><p>website, by creating and graphically editing&nbsp; HTML, CSS, 
-    Javascript and Folder objects (Containers).&nbsp; If you want to go further, it is easy to 
-    customize the existing TreeLeaf and TreeBranch Python classes. &nbsp; These web tools work 
-    well for both beginners and advanced users.&nbsp;</p><p>I invite you to get started by 
-    <a href="./ckedit">editing this page</a>.&nbsp;</p><p>&nbsp;</p>
-            appRoot['green'] = TreeLeaf(title='Green leaf', body='A summer leaf')
-            appRoot['yellow'] = TreeLeaf(title='Yellow leaf', body='An automn leaf')
-            transaction.manager.commit()
-"""
+appRootSource="""
+
+<h2>Welcome to the ZODB Demo.&nbsp;</h2>
+
+<p>ZODB is an Object Oriented database written in Python.&nbsp; Just subclass off of class Persistent, and your application becomes persistent.</p>
+
+<p>This demo showcases what is possible with the ZODB. &nbsp;In your browser,&nbsp; you can build a sophisticated&nbsp; web application just by adding&nbsp; HTML, CSS, Javascript, Python&nbsp; and Folder (Container) objects.&nbsp; They all have gorgeous editors, HTML objects have both a technical Ace Editor and a WYSIWYG ckEditor.&nbsp;</p>
+
+<p>But this is not just a tool for end users.&nbsp; We invite you jump into file system development.&nbsp; See how easy it is to customize the existing TreeLeaf and TreeBranch objects, to build your own advanced applications.&nbsp;&nbsp;These web tools work well for both beginners and advanced users.&nbsp; Indeed there are hundreds of man years of excellent software engineering hiding under this pretty user interface.&nbsp;</p>
+
+<p>I invite you to get started by <a href="./ckedit">editing this page</a>.&nbsp;</p>
+
+<p>&nbsp;</p>
+
+ """
 
 indexSource=""" 
+ 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,7 +37,38 @@ indexSource="""
  
     </head>
     <body>
-        ${context(view)}
-         
+        ${structure:context(view)}
+          ${structure: view.acquire('footer').source}
     </body>
-</html>"""
+</html>
+
+"""
+
+
+footerSource="""
+<div style="padding-left: 30px;padding-right: 30px;"> 
+<h3>Credits</h3>
+
+<p><a href="http://https:zopache.com">Zopache</a>&nbsp;is built with the&nbsp;<a href="https://ace.c9.io/">Ace Editor</a>,&nbsp;<a href="https://ckeditor.com/">ckEditor</a>, the&nbsp;<a href="https://github.com/PythonLinks/ZodbDemo#zodb--cromlech--introduction-and-demo">Cromlech Toolkit</a>,&nbsp;<a href="https://www.docker.com/">Docker,</a>&nbsp;&nbsp;the&nbsp;<a href="http://https:python.org">Python</a>&nbsp;language,&nbsp; <a href="http://restrictedpython.readthedocs.io/en/latest/">Restricted Python</a> the object-oriented&nbsp;<a href="http://www.zodb.org/en/latest/">ZODB</a>&nbsp;database,&nbsp;&nbsp;<a href="http://uwsgi-docs.readthedocs.io/en/latest/">uwsgi</a>,&nbsp;<a href="https://readthedocs.org/projects/zopeinterface/">Zope.Interface</a>&nbsp;and many other libraries.&nbsp; Thanks to the innumerable open source volunteers who made this project possible.&nbsp;&copy; Christopher Lozinski 2018.&nbsp; Provided to you by <a href="http://PythonLinks.info">PythonLinks.info</a></p>
+</div>
+"""
+from cromdemo.models import TreeRoot, TreeLeaf, TreeBranch
+from zopache.ttw.html import HTML,  AceHTML
+
+def initialize(root):
+            appRoot = root['applicationRoot'] = TreeRoot()
+            appRoot.source=appRootSource
+            appRoot.title= 'ZODB Demo'
+            
+            index=AceHTML()
+            index.title='The page layout'
+            index.source=indexSource
+            appRoot['index']=index
+
+            footer=HTML()
+            footer.title='The footer html'
+            footer.source=footerSource
+            appRoot['footer']=footer
+            
+            appRoot['green'] = TreeLeaf(title='Green leaf', body='A summer leaf')
+            appRoot['yellow'] = TreeLeaf(title='Yellow leaf', body='An automn leaf')

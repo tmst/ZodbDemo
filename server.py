@@ -8,19 +8,11 @@ from loader import PythonConfiguration
 def populate_db(db, config):
     import transaction
     from cromlech.zodb import Connection
-    from cromdemo.models import TreeRoot, TreeLeaf, TreeBranch
-    from cromdemo.content import appRootSource, indexSource
-    from zopache.ttw.html import HTML  
+    from cromdemo.content import initialize
     with Connection(db, transaction_manager=transaction.manager) as conn:
         root = conn.root()
         if not 'applicationRoot' in root:
-            appRoot = root['applicationRoot'] = TreeRoot()
-            appRoot.source=appRootSource
-            html=HTML()
-            html.source=indexSource
-            appRoot['index']=html
-            appRoot['green'] = TreeLeaf(title='Green leaf', body='A summer leaf')
-            appRoot['yellow'] = TreeLeaf(title='Yellow leaf', body='An automn leaf')
+            initialize(root)
             transaction.manager.commit()
 
 

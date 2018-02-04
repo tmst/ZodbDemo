@@ -34,16 +34,22 @@ class Logout(Page):
         raise HTTPFound(location='/')
 
 
-@view_component
-@name('index')
-@title("Manage")
-@target(ITab)
-@context(IBTreeContainer)
+#THIS WAS THE ORIGINAL VIEW ON BTREES CONTAINERS
+#IT IS NO LONGER USED, BUT IT COULD BE USED.
+# TO DO SO, 
+# JUST REMOVE THE COMMENT LINES BELOW. 
+    
+#@view_component
+#@name('index')
+#@title("Manage")
+#@target(ITab)
+#@context(IBTreeContainer)
 class ContainerIndex(Page):
     template = tal_template('home.pt')
 
     
 @view_component
+@name('manage')
 @name('index')
 @title("View")
 @target(ITab)
