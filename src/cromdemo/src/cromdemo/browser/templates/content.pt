@@ -1,0 +1,7 @@
+<div id="leaf">
+  <h1 tal:content="context.__name__" />
+  <p tal:content="structure: context.source" />
+  <a tal:attributes="href view.url(context) + '/ckedit'">
+    Edit content (admin only)
+  </a>
+</div>

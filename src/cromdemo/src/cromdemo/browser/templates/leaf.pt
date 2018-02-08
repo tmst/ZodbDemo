@@ -1,7 +1,0 @@
-<div id="leaf">
-  <h1 tal:content="context.__name__" />
-  <p tal:content="context.body" />
-  <a tal:attributes="href view.url(context) + '/edit'">
-    Edit content (admin only)
-  </a>
-</div>

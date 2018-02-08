@@ -11,12 +11,12 @@ from cromlech.browser.directives import title
 from zope.interface import Interface
 from dolmen.container import IBTreeContainer
 from cromlech.browser.interfaces import IURL, IPublicationRoot
-from zopache.crud import IRootContainer
-from cromdemo.interfaces import ITab, ITreeLeaf
+from zopache.crud.interfaces import IRootContainer
+from cromdemo.interfaces import ITab,IContent
 
 
 from zopache.core.page  import  Page
-from ..models import TreeRoot, TreeLeaf
+from ..models import TreeRoot
 from ..auth import logout
 from dolmen.breadcrumbs import BreadcrumbsRenderer
 from . import tal_template
@@ -48,15 +48,14 @@ class ContainerIndex(Page):
     template = tal_template('home.pt')
 
     
-@view_component
-@name('manage')
-@name('index')
-@title("View")
-@target(ITab)
-@context(ITreeLeaf)
-@order(10)
-class LeafIndex(Page):
-    template = tal_template('leaf.pt')
+#@view_component
+#@name('index')
+#@title("View")
+#@target(ITab)
+#@context(IContent)
+#@order(10)
+class ContentIndex(Page):
+    template = tal_template('content.pt')
 
 
 @view_component

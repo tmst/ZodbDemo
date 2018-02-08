@@ -12,45 +12,52 @@ from dolmen.forms.base import Fields, FAILURE
 from dolmen.forms.base import action, name, context, form_component
 from dolmen.forms.base import apply_data_event
 from dolmen.forms.base.errors import Error
-from zopache.crud.components import AddForm
-from zope.interface import implementer
-
+from zopache.ttw.html  import AddCkHTML
+from zopache.ttw.container import AddContainer
+from zope.interface import implementer, Interface
 
 from zopache.core.forms  import  Form
 from ..interfaces import ITab
 
 from ..auth import Auth
-from ..interfaces import  ITreeLeaf, ITreeBranch, ILogin
-from ..models import  TreeLeaf, TreeBranch
+from ..interfaces import  IContent, IContentContainer, ILogin
+from ..models import  Content, ContentContainer
 from dolmen.container import IBTreeContainer, BTreeContainer
 from dolmen.template import TALTemplate
 from zopache.crud.interfaces import IApp
 
 @form_component
-@name('addLeaf')
+@name('addContent')
 @context(IBTreeContainer)
 @target(ITab)
-@title("Add Tree Leaf")
+@title("Add Content")
 @permissions('Manage')
-class AddLeaf(AddForm):
+class AddContent(AddCkHTML):
+    label='Add a new Content Object'
     implements = IApp
-    interface = ITreeLeaf
+    interface = IContent
     ignoreContent = True
-    factory=TreeLeaf
+    factory=Content
 
+#THERE ARE BASICALLY TWO VERSIONS OF CONTAINERS
+#ONE IS THE STANDARD ONE AT zopache.container
+#AND THE OTHER ONE IS THIS ONE, DESIGNED TO BE CUSTOMIZED  YOU
 @form_component
-@name('addBranch')
+@name('addContentContainer')
 @context(IBTreeContainer)
 @target(ITab)
-@title("Add Tree Branch")
+@title("Add Content Container")
 @permissions('Manage')
-class AddBranch(AddForm):
+class AddContentContainer(AddContainer):
+    label='Add a new Content Container'
     implements = IApp
-    interface = ITreeBranch
+    interface = Interface
     ignoreContent = True
-    factory=TreeBranch   
+    factory=ContentContainer
 
 
+
+    
 @form_component
 @name('login')
 @context(Auth)

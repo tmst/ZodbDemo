@@ -10,7 +10,7 @@ from cromlech.security import getSecurityGuards, permissions
 from zope.interface import implementedBy
 
 from . import tal_template
-from ..interfaces import ITab, ITreeLeaf
+from ..interfaces import ITab 
 from zopache.core.layout import SiteHeader, AdminHeader, ContextualActions
 from zopache.core.layout import Footer, Breadcrumbs
 from dolmen.breadcrumbs import BreadcrumbsRenderer
@@ -74,7 +74,7 @@ def sort_key(component):
     explicit = order.get_policy(component[1], order.dotted_name, 0)
     return (explicit, component[1].__module__, component[1].__class__.__name__)
 
-from cromdemo.models import TreeLeaf
+
 @viewlet
 @slot(ContextualActions)
 class Tabs(Viewlet):

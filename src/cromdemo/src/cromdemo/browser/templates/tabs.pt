@@ -17,12 +17,12 @@ Add  <span class="caret"></span></a>
 <li><a href="./addCSS">CSS</a></li>
 <li><a href="./addContainer">Container</a></li>
 <li><a href="./addHTML">HTML</a></li>
-<li><a href="./addCkHTML">CkHTML</a></li>
-
+<li><a href="./addAceHTML">Ace HTML</a></li>
 <li><a href="./addJavascript">Javascript</a></li>
 <li><a href="./addJavascriptFolder">Javascript Folder</a></li>
+<!--
 <li><a href="./addPython">Python</a></li>
-
+-->
 </ul>
 </li>
 
@@ -46,7 +46,7 @@ CRUD  <span class="caret"></span></a>
 
 </ul>
 </li>
-
+<li><a href="./">View</a></li>
 <li><a href="./logout">Logout</a></li>
 </ul>
 </div>

@@ -40,7 +40,10 @@ def secure_query_view(request, context, name=""):
     factory = IView.component(context, request, name=name)
     if predict is not None:
         factory = predict(factory)  # raises if security fails.
+
     view = factory(context, request)
+
+
     if check is not None:
         check(view)  # raises if security fails.
     return view

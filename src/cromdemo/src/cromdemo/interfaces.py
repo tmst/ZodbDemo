@@ -7,8 +7,9 @@ from zope.interface import implementer, Interface
 from dolmen.container import BTreeContainer,IBTreeContainer
 from cromlech.browser import IView
 from zope.schema import Text, TextLine, Password
-from zopache.crud.interfaces import ILeaf, IContainer
-from zopache.core.interfaces import ISource
+from zopache.ttw.interfaces import ILeaf, IHTMLContainer
+from zopache.core.interfaces import IHTML
+from zopache.crud.interfaces import IRootContainer
 
 class ITab(IView):
     pass
@@ -21,25 +22,13 @@ class ILogin(Interface):
 
     password = Password(
         title='Password', required=True)
-
-
     
-class ITreeLeaf(ILeaf,ISource):
+class IContent(ILeaf,IHTML):
+      pass
 
-    title = TextLine(
-        title='Title', required=True)
+class IContentContainer(IHTMLContainer):
+    pass
 
-    body = Text(
-        title='Body', required=True)
-
-#The difference is that Tree Branches subclass
-#off of containers, so you can add stuff to them. 
-class ITreeBranch(IContainer):
-
-    title = TextLine(
-        title='Title', required=True)
-
-    body = Text(
-        title='Body', required=True)    
-
+class IRootContentContainer(IRootContainer,IContentContainer):
+    pass
 
