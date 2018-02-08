@@ -16,6 +16,8 @@ bin/buildout
 pip install uwsgi
 uwsgi --http :8081 -p1 --honour-stdin --static-map2 /favicon.ico=./favicon.ico --wsgi-file server.py
 
+And then the username:password is admin:admin
+
 If you do not have Python3.4 installed, probably best to use pyenv to install it.
 
 Here is how to install venv.
