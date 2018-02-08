@@ -6,15 +6,15 @@ Python 3.4+ required.
 
 First the commands, then explanations.
 
-$>bash
-$>git clone https://github.com/PythonLinks/Demo
-$>cd ZodbDemo
-$>virtualenv -p /usr/bin/python3 .
-$>source bin/activate
-$>python bootstrap.py
-$>bin/buildout
-$>pip install uwsgi
-$>uwsgi --http :8081 -p1 --honour-stdin --static-map2 /favicon.ico=./favicon.ico --wsgi-file server.py
+bash
+git clone https://github.com/PythonLinks/Demo
+cd ZodbDemo
+virtualenv -p /usr/bin/python3 .
+source bin/activate
+python bootstrap.py
+bin/buildout
+pip install uwsgi
+uwsgi --http :8081 -p1 --honour-stdin --static-map2 /favicon.ico=./favicon.ico --wsgi-file server.py
 
 If you do not have Python3.4 installed, probably best to use pyenv to install it.
 
