@@ -8,7 +8,7 @@ First the commands, then explanations.
 
 $>bash
 $>git clone https://github.com/PythonLinks/Demo
-$>cd Demo
+$>cd ZodbDemo
 $>virtualenv -p /usr/bin/python3 .
 $>source bin/activate
 $>python bootstrap.py
